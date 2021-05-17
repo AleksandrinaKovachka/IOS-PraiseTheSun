@@ -14,6 +14,10 @@
 		8EC231AC264E5B2B008EACBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC231AB264E5B2B008EACBE /* Assets.xcassets */; };
 		8EC231AF264E5B2B008EACBE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC231AD264E5B2B008EACBE /* LaunchScreen.storyboard */; };
 		8EC231B2264E5B2B008EACBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231B1264E5B2B008EACBE /* main.m */; };
+		8EC231BE264E7C2E008EACBE /* Dictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231BD264E7C2E008EACBE /* Dictionary.m */; };
+		8EC231C1265243A8008EACBE /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231C0265243A8008EACBE /* ConsoleViewController.m */; };
+		8EC231D026527B3B008EACBE /* bg_en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EC231CF26527B3A008EACBE /* bg_en.txt */; };
+		8EC231D326527B46008EACBE /* en_bg.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EC231D226527B46008EACBE /* en_bg.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,12 @@
 		8EC231AE264E5B2B008EACBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EC231B0264E5B2B008EACBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EC231B1264E5B2B008EACBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8EC231BC264E7C2E008EACBE /* Dictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
+		8EC231BD264E7C2E008EACBE /* Dictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dictionary.m; sourceTree = "<group>"; };
+		8EC231C0265243A8008EACBE /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
+		8EC231C3265243B9008EACBE /* ConsoleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
+		8EC231CF26527B3A008EACBE /* bg_en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bg_en.txt; sourceTree = "<group>"; };
+		8EC231D226527B46008EACBE /* en_bg.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = en_bg.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +71,9 @@
 		8EC2319E264E5B2A008EACBE /* PraiseTheSun */ = {
 			isa = PBXGroup;
 			children = (
+				8EC231C72652778C008EACBE /* Resources */,
+				8EC231BB264E7ACA008EACBE /* ViewControllers */,
+				8EC231BA264E7995008EACBE /* DictionaryClasses */,
 				8EC2319F264E5B2A008EACBE /* AppDelegate.h */,
 				8EC231A0264E5B2A008EACBE /* AppDelegate.m */,
 				8EC231A2264E5B2A008EACBE /* SceneDelegate.h */,
@@ -74,6 +87,33 @@
 				8EC231B1264E5B2B008EACBE /* main.m */,
 			);
 			path = PraiseTheSun;
+			sourceTree = "<group>";
+		};
+		8EC231BA264E7995008EACBE /* DictionaryClasses */ = {
+			isa = PBXGroup;
+			children = (
+				8EC231BC264E7C2E008EACBE /* Dictionary.h */,
+				8EC231BD264E7C2E008EACBE /* Dictionary.m */,
+			);
+			path = DictionaryClasses;
+			sourceTree = "<group>";
+		};
+		8EC231BB264E7ACA008EACBE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8EC231C3265243B9008EACBE /* ConsoleViewController.h */,
+				8EC231C0265243A8008EACBE /* ConsoleViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8EC231C72652778C008EACBE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8EC231CF26527B3A008EACBE /* bg_en.txt */,
+				8EC231D226527B46008EACBE /* en_bg.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,8 +172,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC231D326527B46008EACBE /* en_bg.txt in Resources */,
 				8EC231AF264E5B2B008EACBE /* LaunchScreen.storyboard in Resources */,
 				8EC231AC264E5B2B008EACBE /* Assets.xcassets in Resources */,
+				8EC231D026527B3B008EACBE /* bg_en.txt in Resources */,
 				8EC231AA264E5B2A008EACBE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,8 +189,10 @@
 			files = (
 				8EC231A7264E5B2A008EACBE /* ViewController.m in Sources */,
 				8EC231A1264E5B2A008EACBE /* AppDelegate.m in Sources */,
+				8EC231C1265243A8008EACBE /* ConsoleViewController.m in Sources */,
 				8EC231B2264E5B2B008EACBE /* main.m in Sources */,
 				8EC231A4264E5B2A008EACBE /* SceneDelegate.m in Sources */,
+				8EC231BE264E7C2E008EACBE /* Dictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +338,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GKHHS42JFG;
 				INFOPLIST_FILE = PraiseTheSun/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +357,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GKHHS42JFG;
 				INFOPLIST_FILE = PraiseTheSun/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

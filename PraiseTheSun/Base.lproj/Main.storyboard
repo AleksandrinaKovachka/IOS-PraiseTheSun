@@ -1,24 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jYG-4b-S4i">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-201" y="106"/>
+        </scene>
+        <!--Console View Controller-->
+        <scene sceneID="ZVf-LR-vAw">
+            <objects>
+                <viewController id="jYG-4b-S4i" customClass="ConsoleViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CXd-90-pza">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Board" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-Be-iWB">
+                                <rect key="frame" x="45" y="81" width="325" height="291"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="291" id="lqI-ji-Ui5" userLabel="height = 150"/>
+                                    <constraint firstAttribute="width" constant="325" id="s6t-PR-IvV" userLabel="width = 150"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IrP-MV-4D3">
+                                <rect key="frame" x="45" y="422" width="211" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="211" id="O8a-Yt-KU9"/>
+                                    <constraint firstAttribute="height" constant="34" id="bIt-jV-OzK"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipP-r3-QiC">
+                                <rect key="frame" x="176" y="500" width="63" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="63" id="Eh2-JJ-lRY"/>
+                                    <constraint firstAttribute="height" constant="36" id="cC9-Ua-i8c"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClickSubmit:" destination="jYG-4b-S4i" eventType="touchUpInside" id="N0t-HN-HBa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XqO-yj-ilE"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IrP-MV-4D3" firstAttribute="top" secondItem="FEG-Be-iWB" secondAttribute="bottom" constant="50" id="3dX-Di-Z9M"/>
+                            <constraint firstItem="FEG-Be-iWB" firstAttribute="leading" secondItem="XqO-yj-ilE" secondAttribute="leading" constant="45" id="DyQ-h9-mu3"/>
+                            <constraint firstItem="ipP-r3-QiC" firstAttribute="leading" secondItem="IrP-MV-4D3" secondAttribute="trailing" constant="-80" id="F6C-i3-4Kc"/>
+                            <constraint firstItem="FEG-Be-iWB" firstAttribute="top" secondItem="XqO-yj-ilE" secondAttribute="top" constant="37" id="djE-Cf-kDg"/>
+                            <constraint firstItem="IrP-MV-4D3" firstAttribute="trailing" secondItem="FEG-Be-iWB" secondAttribute="trailing" constant="-114" id="tp5-oa-a3o"/>
+                            <constraint firstItem="ipP-r3-QiC" firstAttribute="top" secondItem="IrP-MV-4D3" secondAttribute="bottom" constant="44" id="yNF-Ck-pEl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="consoleBoardLabel" destination="FEG-Be-iWB" id="slG-NC-OT9"/>
+                        <outlet property="inputChoice" destination="IrP-MV-4D3" id="Nag-HJ-PDL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dze-me-4Xl" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1113" y="106"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -1,0 +1,48 @@
+//
+//  ConsoleViewController.m
+//  Tic-Tac-Toe
+//
+//  Created by A-Team Intern on 19.04.21.
+//
+
+#import "ConsoleViewController.h"
+#import "Dictionary.h"
+
+@interface ConsoleViewController ()
+
+@property (strong, nonatomic) Dictionary* dictionary;
+
+@end
+
+@implementation ConsoleViewController
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.dictionary = [[Dictionary alloc] initWithLetter:'A'];
+    [self.dictionary createPositionFile];
+    
+    //TODO: generate file with index - ones - how to get part of file
+    //create file and search in dictionary
+
+}
+
+- (IBAction)onClickSubmit:(id)sender
+{
+    
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
