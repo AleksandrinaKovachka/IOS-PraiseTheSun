@@ -21,8 +21,8 @@
 {
     [super viewDidLoad];
     
-    self.dictionary = [[Dictionary alloc] initWithLetter:'A'];
-    [self.dictionary createPositionFile];
+    self.dictionary = [[Dictionary alloc] initWithLanguage:@"en" andLetter:'A'];
+    //[self.dictionary searchInDictionary];
     
     //TODO: generate file with index - ones - how to get part of file
     //create file and search in dictionary

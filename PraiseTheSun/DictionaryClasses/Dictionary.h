@@ -14,14 +14,18 @@ NS_ASSUME_NONNULL_BEGIN
 //one letter
 @property (readonly) char letter;
 
+//language
+@property (strong, nonatomic) NSString* language;
+
+
 //init with this one letter - initialize array with index from file
--(instancetype)initWithLetter:(char)letter;
+-(instancetype)initWithLanguage:(NSString*)language andLetter:(char)letter;
+
+//load data for letter position
+-(void)loadPositions;
 
 //function to search by part of word - return words starting with this part - if user push on word ?
 -(NSString*)dictionaryContentStartedWith:(NSString*)partOfWord;
-
-//to create position file
--(void)createPositionFile;
 
 @end
 
