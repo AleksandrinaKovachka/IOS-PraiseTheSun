@@ -12,20 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Dictionary : NSObject
 
 //one letter
-@property (readonly) char letter;
+//@property (readonly) char letter;
 
 //language
 @property (strong, nonatomic) NSString* language;
 
 
 //init with this one letter - initialize array with index from file
--(instancetype)initWithLanguage:(NSString*)language andLetter:(char)letter;
+-(instancetype)initWithLanguage:(NSString*)language;
 
 //load data for letter position
--(void)loadPositions;
+//-(void)loadPositions;
 
 //function to search by part of word - return words starting with this part - if user push on word ?
--(NSString*)dictionaryContentStartedWith:(NSString*)partOfWord;
+-(NSString*)printWordsStartedWith:(NSString*)word;
 
 @end
 

@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
     
-    self.dictionary = [[Dictionary alloc] initWithLanguage:@"en" andLetter:'A'];
+    self.dictionary = [[Dictionary alloc] initWithLanguage:@"en"];
     //[self.dictionary searchInDictionary];
     
     //TODO: generate file with index - ones - how to get part of file
@@ -31,7 +31,7 @@
 
 - (IBAction)onClickSubmit:(id)sender
 {
-    
+    self.consoleBoardLabel.text = [self.dictionary printWordsStartedWith:self.inputChoice.text];
 }
 
 
