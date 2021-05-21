@@ -7,7 +7,7 @@
 
 #import "Dictionary.h"
 
-@interface Dictionary ()
+/*@interface Dictionary ()
 
 @property (strong, nonatomic) NSString* inputWord;
 @property (strong, nonatomic) NSMutableDictionary<NSString*, NSString*>* wordsDescription;
@@ -173,16 +173,16 @@
     return [NSString stringWithString:wordsToDisplay];
 }
 
-@end
+@end*/
 
-/*@interface Dictionary ()
+@interface Dictionary ()
 
 @property (strong, nonatomic) NSString* word;
 
 @property (strong, nonatomic) NSString* curLetter; //if user clear search bar - the letter have to be change
 
-@property (strong, nonatomic) NSDictionary<NSString*, NSNumber*>* letterPositions;
-@property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* testLetterPositions;
+@property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* letterPositions;
+//@property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* testLetterPositions;
 
 @property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* wordsWithCurLetter;
 
@@ -200,11 +200,11 @@
         self.language = language;
         self.wordsWithCurLetter = [[NSMutableDictionary alloc] init];
         
-        self.testLetterPositions = [[NSMutableDictionary alloc] init];
-        [self createPositionFile];
+        //self.testLetterPositions = [[NSMutableDictionary alloc] init];
+        //[self createPositionFile];
         //self.wordsToDisplay = [[NSMutableArray alloc] init];
         
-        //[self loadPositions];
+        [self loadPositions];
         //[self printPositions];
         
         //get index for letter positions from position file
@@ -228,11 +228,11 @@
     {
         NSLog(@"no file");
         [self createPositionFile];
-        [self printPositions];
+        //[self printPositions];
         return;
     }
     
-    self.letterPositions = [[NSDictionary alloc] initWithContentsOfFile:fileName];
+    self.letterPositions = [[NSMutableDictionary alloc] initWithContentsOfFile:fileName];
 }
 
 //search words
@@ -278,7 +278,7 @@
         if ([self.curLetter isEqual:[wordInDictionary substringWithRange:NSMakeRange(0, 1)]])
         {
             int positionInFile = position - (int)[line rangeOfString:@"@"].location;
-            [self.wordsWithCurLetter setValue:[NSNumber numberWithInt:positionInFile] forKey:wordInDictionary];
+            [self.wordsWithCurLetter setValue:[NSNumber numberWithInt:positionInFile] forKey:wordInDictionary]; //not currect
             
             return YES;
         }
@@ -368,27 +368,27 @@
     FILE* file = fopen([fileRoot UTF8String], "r");
     char buffer[1024];
     long cnt = 0;
+    long prevCnt = 0;
     
     while (fgets(buffer, 1024, file)) //line by line
     {
         NSString* line = [NSString stringWithUTF8String:buffer];
         
-        //cnt += line.length; //TODO: get position in file
-        
-        cnt = ftell(file) - 2;
+        cnt = prevCnt;
+        prevCnt = ftell(file);
         
         [self searchLetter:line andCnt:cnt];
     }
     
     fclose(file);
     
-    [self testPosition];
+    //[self testPosition];
     
     //save in file - dictionary letter-key, position-value
     //[self savePositionInFile];
 }
 
--(void)testPosition
+/*-(void)testPosition
 {
     NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
     
@@ -410,7 +410,7 @@
     //}
     
     fclose(file);
-}
+}*/
 
 -(void)savePositionInFile
 {
@@ -440,31 +440,13 @@
             //int letterLocation = (int)[line rangeOfString:@"@"].location + 1;
             //int letterFileLocation = cnt - letterLocation - 1;
             
-            [self.testLetterPositions setValue:[NSNumber numberWithLong:cnt] forKey:self.curLetter];
-            
-            NSLog(@"%@ %d\n", self.curLetter, cnt);
-            
-            NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
-            
-            NSString* fileRoot = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@_%@", self.language, otherLanguage] ofType:@"txt"];
-            
-            FILE* file = fopen([fileRoot UTF8String], "r");
-            char buffer[1024];
-            
-            int position = [[self.testLetterPositions objectForKey:self.curLetter] intValue];
-            
-            fseek(file, position, SEEK_CUR);
-            
-            fgets(buffer, 1024, file); //or no words
-            NSString* line = [NSString stringWithUTF8String:buffer];
-                
-            NSLog(@"%@\n", line);
-            
-            fclose(file);
+            [self.letterPositions setValue:[NSNumber numberWithLong:cnt] forKey:self.curLetter];
         }
         
     }
-}*/
+}
+
+@end
 
 /*
  //@property (assign) int lastPrintedPosition;
