@@ -7,7 +7,7 @@
 
 #import "Dictionary.h"
 
-/*@interface Dictionary ()
+@interface Dictionary ()
 
 @property (strong, nonatomic) NSString* inputWord;
 @property (strong, nonatomic) NSMutableDictionary<NSString*, NSString*>* wordsDescription;
@@ -80,7 +80,7 @@
     fclose(file);
     
     //save data
-    //[self saveWordsAndDescriptionInFile];
+    [self saveWordsAndDescriptionInFile];
     //[self printData];
 }
 
@@ -136,46 +136,55 @@
     
 }
 
--(NSString*)printWordsStartedWith:(NSString*)word
+-(NSArray<NSString*>*)wordsStartedWith:(NSString*)word
 {
+    if ([word isEqual:@""])
+    {
+        return @[];
+    }
+    
     word = [word uppercaseString];
     self.inputWord = word;
     
-    
-
     return [self equalWords];
 }
 
--(NSString*)equalWords
+-(NSArray<NSString*>*)equalWords
 {
     if (self.inputWord.length != 1 && [self.wordsDescription objectForKey:self.inputWord])
     {
-        return self.inputWord;
+        return @[self.inputWord];
     }
     
-    NSMutableString* wordsToDisplay = [[NSMutableString alloc] init];
+    NSMutableArray<NSString*>* wordsToDisplay = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < self.wordsInDictionary.count; ++i)
     {
         if (self.wordsInDictionary[i].length >= self.inputWord.length && [[self.wordsInDictionary[i] substringWithRange:NSMakeRange(0, self.inputWord.length)] isEqual:self.inputWord])
         {
-            [wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
+            //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
+            [wordsToDisplay addObject:self.wordsInDictionary[i]];
         }
     }
     
-    if (wordsToDisplay.length == 0)
+    if (wordsToDisplay.count == 0)
     {
         self.inputWord = [self.inputWord substringWithRange:NSMakeRange(0, self.inputWord.length - 1)];
         
         return [self equalWords];
     }
     
-    return [NSString stringWithString:wordsToDisplay];
+    return [NSArray arrayWithArray:wordsToDisplay];//[NSString stringWithString:wordsToDisplay];
 }
 
-@end*/
+-(NSString*)descriptionOfWord:(NSString*)word
+{
+    return [self.wordsDescription objectForKey:word];
+}
 
-@interface Dictionary ()
+@end
+
+/*@interface Dictionary ()
 
 @property (strong, nonatomic) NSString* word;
 
@@ -388,7 +397,7 @@
     //[self savePositionInFile];
 }
 
-/*-(void)testPosition
+-(void)testPosition
 {
     NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
     
@@ -410,7 +419,7 @@
     //}
     
     fclose(file);
-}*/
+}
 
 -(void)savePositionInFile
 {
@@ -447,6 +456,7 @@
 }
 
 @end
+*/
 
 /*
  //@property (assign) int lastPrintedPosition;

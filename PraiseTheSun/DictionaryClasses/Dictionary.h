@@ -25,7 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 //-(void)loadPositions;
 
 //function to search by part of word - return words starting with this part - if user push on word ?
--(NSString*)printWordsStartedWith:(NSString*)word;
+-(NSArray<NSString*>*)wordsStartedWith:(NSString*)word;
+
+-(NSString*)descriptionOfWord:(NSString*)word;
 
 @end
 

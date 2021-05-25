@@ -18,6 +18,10 @@
 		8EC231C1265243A8008EACBE /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231C0265243A8008EACBE /* ConsoleViewController.m */; };
 		8EC231D026527B3B008EACBE /* bg_en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EC231CF26527B3A008EACBE /* bg_en.txt */; };
 		8EC231D326527B46008EACBE /* en_bg.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EC231D226527B46008EACBE /* en_bg.txt */; };
+		8EC231DB265CE805008EACBE /* WordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231DA265CE805008EACBE /* WordsTableViewController.m */; };
+		8EC231DF265CEA56008EACBE /* WordsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231DE265CEA55008EACBE /* WordsTableViewCell.m */; };
+		8EC231E3265CF985008EACBE /* DictionaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231E2265CF985008EACBE /* DictionaryViewController.m */; };
+		8EC231EA265D230F008EACBE /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231E9265D230F008EACBE /* DescriptionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,15 @@
 		8EC231C3265243B9008EACBE /* ConsoleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
 		8EC231CF26527B3A008EACBE /* bg_en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bg_en.txt; sourceTree = "<group>"; };
 		8EC231D226527B46008EACBE /* en_bg.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = en_bg.txt; sourceTree = "<group>"; };
+		8EC231D9265CE805008EACBE /* WordsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordsTableViewController.h; sourceTree = "<group>"; };
+		8EC231DA265CE805008EACBE /* WordsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordsTableViewController.m; sourceTree = "<group>"; };
+		8EC231DD265CEA55008EACBE /* WordsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordsTableViewCell.h; sourceTree = "<group>"; };
+		8EC231DE265CEA55008EACBE /* WordsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordsTableViewCell.m; sourceTree = "<group>"; };
+		8EC231E1265CF985008EACBE /* DictionaryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DictionaryViewController.h; sourceTree = "<group>"; };
+		8EC231E2265CF985008EACBE /* DictionaryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DictionaryViewController.m; sourceTree = "<group>"; };
+		8EC231E6265D18B7008EACBE /* NotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationNames.h; sourceTree = "<group>"; };
+		8EC231E8265D230F008EACBE /* DescriptionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
+		8EC231E9265D230F008EACBE /* DescriptionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +84,7 @@
 		8EC2319E264E5B2A008EACBE /* PraiseTheSun */ = {
 			isa = PBXGroup;
 			children = (
+				8EC231E5265D186E008EACBE /* Utilities */,
 				8EC231C72652778C008EACBE /* Resources */,
 				8EC231BB264E7ACA008EACBE /* ViewControllers */,
 				8EC231BA264E7995008EACBE /* DictionaryClasses */,
@@ -103,6 +117,14 @@
 			children = (
 				8EC231C3265243B9008EACBE /* ConsoleViewController.h */,
 				8EC231C0265243A8008EACBE /* ConsoleViewController.m */,
+				8EC231D9265CE805008EACBE /* WordsTableViewController.h */,
+				8EC231DA265CE805008EACBE /* WordsTableViewController.m */,
+				8EC231DD265CEA55008EACBE /* WordsTableViewCell.h */,
+				8EC231DE265CEA55008EACBE /* WordsTableViewCell.m */,
+				8EC231E1265CF985008EACBE /* DictionaryViewController.h */,
+				8EC231E2265CF985008EACBE /* DictionaryViewController.m */,
+				8EC231E8265D230F008EACBE /* DescriptionViewController.h */,
+				8EC231E9265D230F008EACBE /* DescriptionViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -114,6 +136,14 @@
 				8EC231D226527B46008EACBE /* en_bg.txt */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8EC231E5265D186E008EACBE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8EC231E6265D18B7008EACBE /* NotificationNames.h */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,11 +218,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EC231A7264E5B2A008EACBE /* ViewController.m in Sources */,
+				8EC231DF265CEA56008EACBE /* WordsTableViewCell.m in Sources */,
 				8EC231A1264E5B2A008EACBE /* AppDelegate.m in Sources */,
 				8EC231C1265243A8008EACBE /* ConsoleViewController.m in Sources */,
 				8EC231B2264E5B2B008EACBE /* main.m in Sources */,
+				8EC231EA265D230F008EACBE /* DescriptionViewController.m in Sources */,
 				8EC231A4264E5B2A008EACBE /* SceneDelegate.m in Sources */,
 				8EC231BE264E7C2E008EACBE /* Dictionary.m in Sources */,
+				8EC231DB265CE805008EACBE /* WordsTableViewController.m in Sources */,
+				8EC231E3265CF985008EACBE /* DictionaryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
