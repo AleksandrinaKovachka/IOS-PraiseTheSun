@@ -6,6 +6,7 @@
 //
 
 #import "Dictionary.h"
+#import "NotificationNames.h"
 
 @interface Dictionary ()
 
@@ -206,9 +207,23 @@
 
 -(NSArray<NSString*>*)equalWords
 {
-    if (self.inputWord.length != 1 && ([self.wordsENDescription objectForKey:self.inputWord] || [self.wordsBGDescription objectForKey:self.inputWord]))
+    if ([self.wordsENDescription objectForKey:self.inputWord] || [self.wordsBGDescription objectForKey:self.inputWord])
     {
-        return @[self.inputWord];
+        NSString* wordWithDescription;
+        if ([self.language isEqual:@"en"])
+        {
+            wordWithDescription = [self.wordsENDescription objectForKey: self.inputWord];
+        }
+        else
+        {
+            wordWithDescription = [self.wordsBGDescription objectForKey: self.inputWord];
+        }
+        
+        //notification to change word description
+        [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_HAVE_WORD object:wordWithDescription userInfo:nil];
+        
+        
+        //return @[self.inputWord];
     }
     
     NSMutableArray<NSString*>* wordsToDisplay = [[NSMutableArray alloc] init];
@@ -221,6 +236,7 @@
             {
                 //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
                 [wordsToDisplay addObject:self.wordsInENDictionary[i]];
+                //[wordsToDisplay addObject:[NSString stringWithFormat:@"%@\n%@", self.wordsInENDictionary[i], [self.wordsENDescription objectForKey: self.wordsInENDictionary[i]]]];
             }
         }
     }
@@ -232,11 +248,12 @@
             {
                 //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
                 [wordsToDisplay addObject:self.wordsInBGDictionary[i]];
+                //[wordsToDisplay addObject:[NSString stringWithFormat:@"%@\n%@", self.wordsInBGDictionary[i], [self.wordsBGDescription objectForKey: self.wordsInBGDictionary[i]]]];
             }
         }
     }
     
-    if (wordsToDisplay.count == 0)
+    if (wordsToDisplay.count < 10) //TODO: user choice
     {
         self.inputWord = [self.inputWord substringWithRange:NSMakeRange(0, self.inputWord.length - 1)];
         

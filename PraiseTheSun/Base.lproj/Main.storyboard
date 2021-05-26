@@ -144,28 +144,42 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlM-ph-auK">
-                                <rect key="frame" x="19" y="92" width="286" height="339"/>
+                                <rect key="frame" x="19" y="92" width="273" height="222"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="286" id="1hA-XX-yAY"/>
-                                    <constraint firstAttribute="height" constant="339" id="urJ-g1-8HE"/>
+                                    <constraint firstAttribute="width" constant="273" id="1hA-XX-yAY"/>
+                                    <constraint firstAttribute="height" constant="222" id="urJ-g1-8HE"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="LqZ-1H-j61" kind="embed" id="Jox-6g-Q9k"/>
                                 </connections>
                             </containerView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rzp-pz-ZrF">
+                                <rect key="frame" x="19" y="322" width="273" height="109"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="273" id="ug8-HF-9RF"/>
+                                    <constraint firstAttribute="height" constant="109" id="wEA-AI-Jio"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Je-RM-kgo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zlM-ph-auK" firstAttribute="top" secondItem="8Je-RM-kgo" secondAttribute="top" constant="92" id="2qa-a1-0NV"/>
+                            <constraint firstItem="Rzp-pz-ZrF" firstAttribute="leading" secondItem="8Je-RM-kgo" secondAttribute="leading" constant="19" id="KRQ-5d-NLp"/>
                             <constraint firstItem="6dP-gc-4Mg" firstAttribute="leading" secondItem="8Je-RM-kgo" secondAttribute="leading" constant="16" id="OfV-jy-2eV"/>
                             <constraint firstItem="6dP-gc-4Mg" firstAttribute="top" secondItem="8Je-RM-kgo" secondAttribute="top" constant="28" id="XBO-Jp-We1"/>
                             <constraint firstItem="zlM-ph-auK" firstAttribute="leading" secondItem="8Je-RM-kgo" secondAttribute="leading" constant="19" id="cZK-KD-BJp"/>
                             <constraint firstItem="zlM-ph-auK" firstAttribute="top" secondItem="6dP-gc-4Mg" secondAttribute="bottom" constant="20" id="qwh-3k-Xpb"/>
+                            <constraint firstItem="Rzp-pz-ZrF" firstAttribute="top" secondItem="zlM-ph-auK" secondAttribute="bottom" constant="8" symbolic="YES" id="xLy-as-5LI"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Dictionary" image="character.book.closed.fill" catalog="system" id="QHi-Xh-KMJ"/>
                     <connections>
+                        <outlet property="currentWordDescription" destination="Rzp-pz-ZrF" id="T7q-q6-JpK"/>
                         <outlet property="wordSearchBar" destination="6dP-gc-4Mg" id="BfE-ej-pmw"/>
                     </connections>
                 </viewController>
@@ -178,15 +192,15 @@
             <objects>
                 <tableViewController id="LqZ-1H-j61" customClass="WordsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gS1-k8-SEf">
-                        <rect key="frame" x="0.0" y="0.0" width="286" height="339"/>
+                        <rect key="frame" x="0.0" y="0.0" width="273" height="222"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WordsTableViewID" id="O53-V4-Bs3" customClass="WordsTableViewCell">
-                                <rect key="frame" x="0.0" y="28" width="286" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="273" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O53-V4-Bs3" id="pWa-D3-DN5">
-                                    <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="273" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yb5-ON-AvN">
@@ -233,16 +247,6 @@
                                     <action selector="backToDictionaryOnClick:" destination="e93-WX-X3d" eventType="touchUpInside" id="4Ph-le-RW9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="word description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0A-hi-gDB">
-                                <rect key="frame" x="22.5" y="165" width="268" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="GwZ-WH-EVu"/>
-                                    <constraint firstAttribute="width" constant="268" id="brP-Bc-QZt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8p-QI-Mh5">
                                 <rect key="frame" x="20" y="99" width="284" height="34"/>
                                 <constraints>
@@ -253,21 +257,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="word description" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-Kd-8qG">
+                                <rect key="frame" x="16" y="141" width="288" height="319"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="288" id="dBT-vE-p5k"/>
+                                    <constraint firstAttribute="height" constant="319" id="hAr-hh-871"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EJI-8c-mRf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="o0A-hi-gDB" firstAttribute="leading" secondItem="EJI-8c-mRf" secondAttribute="leading" constant="22.5" id="BAV-9Y-UlV"/>
-                            <constraint firstItem="o0A-hi-gDB" firstAttribute="top" secondItem="a8p-QI-Mh5" secondAttribute="bottom" constant="32" id="J1X-Fd-jjX"/>
                             <constraint firstItem="K6f-Yq-dXe" firstAttribute="leading" secondItem="EJI-8c-mRf" secondAttribute="leading" constant="20" id="K9X-P7-3tF"/>
                             <constraint firstItem="a8p-QI-Mh5" firstAttribute="leading" secondItem="EJI-8c-mRf" secondAttribute="leading" constant="20" id="NGh-JY-qss"/>
                             <constraint firstItem="a8p-QI-Mh5" firstAttribute="top" secondItem="K6f-Yq-dXe" secondAttribute="bottom" constant="36" id="Psj-hP-361"/>
+                            <constraint firstItem="g0D-Kd-8qG" firstAttribute="top" secondItem="a8p-QI-Mh5" secondAttribute="bottom" constant="8" symbolic="YES" id="ZhN-uJ-dvU"/>
                             <constraint firstItem="K6f-Yq-dXe" firstAttribute="top" secondItem="EJI-8c-mRf" secondAttribute="top" constant="22" id="xsb-JA-l1d"/>
+                            <constraint firstItem="g0D-Kd-8qG" firstAttribute="leading" secondItem="EJI-8c-mRf" secondAttribute="leading" constant="16" id="y5r-G5-EBF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eYf-RP-bZH"/>
                     <connections>
-                        <outlet property="wordDescriptionLabel" destination="o0A-hi-gDB" id="vlW-Cg-yRj"/>
+                        <outlet property="wordDescriptionTextView" destination="g0D-Kd-8qG" id="zAC-W7-yTu"/>
                         <outlet property="wordNameLabel" destination="a8p-QI-Mh5" id="ma0-Qs-Sim"/>
                     </connections>
                 </viewController>
@@ -361,8 +376,14 @@
     <resources>
         <image name="character.book.closed.fill" catalog="system" width="115" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

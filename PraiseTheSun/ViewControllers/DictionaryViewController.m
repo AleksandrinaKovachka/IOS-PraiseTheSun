@@ -10,6 +10,8 @@
 
 @interface DictionaryViewController ()
 @property (weak, nonatomic) IBOutlet UISearchBar *wordSearchBar;
+@property (weak, nonatomic) IBOutlet UITextView *currentWordDescription;
+
 
 @end
 
@@ -18,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.wordSearchBar.delegate = self;
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didHaveWordInDictionary:) name:NOTIFICATION_HAVE_WORD object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -25,6 +29,8 @@
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     NSString* partOfWord = searchBar.text;
+    
+    self.currentWordDescription.text = partOfWord;
     
     [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_WORD object:partOfWord userInfo:nil];
     
@@ -36,6 +42,11 @@
     NSString* partOfWord = searchBar.text;
     
     //NSLog(@"%@", partOfWord);
+}
+
+-(void)didHaveWordInDictionary:(NSNotification*)notification
+{
+    self.currentWordDescription.text = notification.object;
 }
 
 /*

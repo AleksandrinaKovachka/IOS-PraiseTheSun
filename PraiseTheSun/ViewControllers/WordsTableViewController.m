@@ -16,6 +16,7 @@
 @property (strong, nonatomic) Dictionary* dictionary;
 @property (strong, nonatomic) NSArray<NSString*>* wordsArray;
 
+
 @end
 
 @implementation WordsTableViewController
@@ -72,7 +73,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* word = self.wordsArray[indexPath.row];
+    NSString* word = self.wordsArray[indexPath.row]; //componentsSeparatedByString:@"\n"].firstObject; //error
     NSString* description = [self.dictionary descriptionOfWord:word];
     
     DescriptionViewController* descriptionController = [DescriptionViewController descriptionViewControllerWith:word andDescription:description];

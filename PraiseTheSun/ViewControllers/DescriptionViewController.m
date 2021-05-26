@@ -9,7 +9,7 @@
 
 @interface DescriptionViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *wordNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *wordDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextView *wordDescriptionTextView;
 
 @property (strong, nonatomic) NSString* word;
 @property (strong, nonatomic) NSString* wordDescription;
@@ -33,7 +33,7 @@
     [super viewDidLoad];
     
     self.wordNameLabel.text = self.word;
-    self.wordDescriptionLabel.text = self.wordDescription;
+    self.wordDescriptionTextView.text = self.wordDescription;
 }
 
 - (IBAction)backToDictionaryOnClick:(id)sender
