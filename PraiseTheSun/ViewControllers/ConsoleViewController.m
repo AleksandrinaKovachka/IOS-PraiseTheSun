@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
     
-    self.dictionary = [[Dictionary alloc] initWithLanguage:@"en"];
+    self.dictionary = [[Dictionary alloc] init];
     //[self.dictionary searchInDictionary];
     
     //TODO: generate file with index - ones - how to get part of file

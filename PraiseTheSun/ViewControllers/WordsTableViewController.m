@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dictionary = [[Dictionary alloc] initWithLanguage:@"en"];
+    self.dictionary = [[Dictionary alloc] init];
     
     self.wordsArray = [[NSMutableArray alloc] init];
     //self.wordsArray = [self.dictionary wordsStartedWith:@"A"];

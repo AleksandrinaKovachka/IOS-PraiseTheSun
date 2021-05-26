@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 //init with this one letter - initialize array with index from file
--(instancetype)initWithLanguage:(NSString*)language;
+-(instancetype)init;//WithLanguage:(NSString*)language;
 
 //load data for letter position
 //-(void)loadPositions;

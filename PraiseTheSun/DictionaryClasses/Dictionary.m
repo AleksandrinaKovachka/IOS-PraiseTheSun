@@ -10,8 +10,11 @@
 @interface Dictionary ()
 
 @property (strong, nonatomic) NSString* inputWord;
-@property (strong, nonatomic) NSMutableDictionary<NSString*, NSString*>* wordsDescription;
-@property (strong, nonatomic) NSMutableArray<NSString*>* wordsInDictionary;
+@property (strong, nonatomic) NSMutableDictionary<NSString*, NSString*>* wordsENDescription;
+@property (strong, nonatomic) NSMutableArray<NSString*>* wordsInENDictionary;
+
+@property (strong, nonatomic) NSMutableDictionary<NSString*, NSString*>* wordsBGDescription;
+@property (strong, nonatomic) NSMutableArray<NSString*>* wordsInBGDictionary;
 
 @property (strong, nonatomic) NSMutableString* wordDescription;
 
@@ -20,11 +23,11 @@
 
 @implementation Dictionary
 
--(instancetype)initWithLanguage:(NSString*)language
+-(instancetype)init//WithLanguage:(NSString*)language
 {
     if ([super init])
     {
-        self.language = language;
+        //self.language = language;
         
         [self loadWordsAndDescription];
     }
@@ -37,26 +40,42 @@
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
     NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* fileWordsName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"words_%@.txt", self.language]];
-    NSString* fileWordsDescriptionName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"words_description_%@.txt", self.language]];
+    NSString* fileWordsENName = [documentsDirectory stringByAppendingPathComponent:@"words_en.txt"];
+    NSString* fileWordsENDescriptionName = [documentsDirectory stringByAppendingPathComponent:@"words_description_en.txt"];
+    
+    NSString* fileWordsBGName = [documentsDirectory stringByAppendingPathComponent:@"words_bg.txt"];
+    NSString* fileWordsBGDescriptionName = [documentsDirectory stringByAppendingPathComponent:@"words_description_bg.txt"];
     
     NSFileManager* fileManager = [NSFileManager defaultManager];
     
     //check if have that file
-    if (![fileManager fileExistsAtPath:fileWordsName] && ![fileManager fileExistsAtPath:fileWordsDescriptionName])
+    if (![fileManager fileExistsAtPath:fileWordsENName] && ![fileManager fileExistsAtPath:fileWordsENDescriptionName] &&
+        ![fileManager fileExistsAtPath:fileWordsBGName] && ![fileManager fileExistsAtPath:fileWordsBGDescriptionName])
     {
         NSLog(@"no file");
         
-        self.wordsInDictionary = [[NSMutableArray alloc] init];
-        self.wordsDescription = [[NSMutableDictionary alloc] init];
+        self.wordsInENDictionary = [[NSMutableArray alloc] init];
+        self.wordsENDescription = [[NSMutableDictionary alloc] init];
+        
+        self.wordsInBGDictionary = [[NSMutableArray alloc] init];
+        self.wordsBGDescription = [[NSMutableDictionary alloc] init];
+        
         self.wordDescription = [[NSMutableString alloc] init];
         
+        self.language = @"en";
         [self createWordsAndDescriptionFiles];
+        
+        self.language = @"bg";
+        [self createWordsAndDescriptionFiles];
+        
         return;
     }
     
-    self.wordsInDictionary = [[NSMutableArray alloc] initWithContentsOfFile:fileWordsName];
-    self.wordsDescription = [[NSMutableDictionary alloc] initWithContentsOfFile:fileWordsDescriptionName];
+    self.wordsInENDictionary = [[NSMutableArray alloc] initWithContentsOfFile:fileWordsENName];
+    self.wordsENDescription = [[NSMutableDictionary alloc] initWithContentsOfFile:fileWordsENDescriptionName];
+    
+    self.wordsInBGDictionary = [[NSMutableArray alloc] initWithContentsOfFile:fileWordsBGName];
+    self.wordsBGDescription = [[NSMutableDictionary alloc] initWithContentsOfFile:fileWordsBGDescriptionName];
 }
 
 -(void)createWordsAndDescriptionFiles
@@ -94,7 +113,15 @@
         if (lastWord != nil)
         {
             [self.wordDescription appendString:[line componentsSeparatedByString:@"@"].firstObject];
-            [self.wordsDescription setValue:self.wordDescription forKey:lastWord];
+            
+            if ([self.language isEqual:@"en"])
+            {
+                [self.wordsENDescription setValue:self.wordDescription forKey:lastWord];
+            }
+            else
+            {
+                [self.wordsBGDescription setValue:self.wordDescription forKey:lastWord];
+            }
 
             self.wordDescription = [[NSMutableString alloc] init];
         }
@@ -102,7 +129,15 @@
         if (self.inputWord.length != 0)
         {
             self.inputWord = [self.inputWord substringWithRange:NSMakeRange(0, self.inputWord.length - 1)];
-            [self.wordsInDictionary addObject:self.inputWord];
+            
+            if ([self.language isEqual:@"en"])
+            {
+                [self.wordsInENDictionary addObject:self.inputWord];
+            }
+            else
+            {
+                [self.wordsInBGDictionary addObject:self.inputWord];
+            }
         }
     }
     else
@@ -119,19 +154,28 @@
     NSString* fileWordsName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"words_%@.txt", self.language]];
     NSString* fileWordsDescriptionName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"words_description_%@.txt", self.language]];
     
-    [self.wordsInDictionary writeToFile:fileWordsName atomically:YES];
-    [self.wordsDescription writeToFile:fileWordsDescriptionName atomically:YES];
+    if ([self.language isEqual:@"en"])
+    {
+        [self.wordsInENDictionary writeToFile:fileWordsName atomically:YES];
+        [self.wordsENDescription writeToFile:fileWordsDescriptionName atomically:YES];
+    }
+    else
+    {
+        [self.wordsInBGDictionary writeToFile:fileWordsName atomically:YES];
+        [self.wordsBGDescription writeToFile:fileWordsDescriptionName atomically:YES];
+    }
+
 }
 
 -(void)printData
 {
     
-    if ([self.wordsDescription objectForKey:@"AARDVARK"])
+    if ([self.wordsENDescription objectForKey:@"AARDVARK"])
     {
-        NSString* value = [self.wordsDescription objectForKey:@"A"];
+        NSString* value = [self.wordsENDescription objectForKey:@"A"];
         NSLog(@"%@", value);
-        NSLog(@"Description: %@", [self.wordsDescription objectForKey:@"AARDVARK"]);
-        NSLog(@"%@", [self.wordsDescription valueForKey:@"AARDVARK"]);
+        NSLog(@"Description: %@", [self.wordsENDescription objectForKey:@"AARDVARK"]);
+        NSLog(@"%@", [self.wordsENDescription valueForKey:@"AARDVARK"]);
     }
     
 }
@@ -146,24 +190,48 @@
     word = [word uppercaseString];
     self.inputWord = word;
     
+    //language
+    if ([self.wordsENDescription objectForKey:[self.inputWord substringWithRange:NSMakeRange(0, 1)]])
+    {
+        self.language = @"en";
+    }
+    else
+    {
+        self.language = @"bg";
+    }
+    
     return [self equalWords];
 }
 
 -(NSArray<NSString*>*)equalWords
 {
-    if (self.inputWord.length != 1 && [self.wordsDescription objectForKey:self.inputWord])
+    if (self.inputWord.length != 1 && ([self.wordsENDescription objectForKey:self.inputWord] || [self.wordsBGDescription objectForKey:self.inputWord]))
     {
         return @[self.inputWord];
     }
     
     NSMutableArray<NSString*>* wordsToDisplay = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < self.wordsInDictionary.count; ++i)
+    if ([self.language isEqual:@"en"])
     {
-        if (self.wordsInDictionary[i].length >= self.inputWord.length && [[self.wordsInDictionary[i] substringWithRange:NSMakeRange(0, self.inputWord.length)] isEqual:self.inputWord])
+        for (int i = 0; i < self.wordsInENDictionary.count; ++i)
         {
-            //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
-            [wordsToDisplay addObject:self.wordsInDictionary[i]];
+            if (self.wordsInENDictionary[i].length >= self.inputWord.length && [[self.wordsInENDictionary[i] substringWithRange:NSMakeRange(0, self.inputWord.length)] isEqual:self.inputWord])
+            {
+                //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
+                [wordsToDisplay addObject:self.wordsInENDictionary[i]];
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < self.wordsInBGDictionary.count; ++i)
+        {
+            if (self.wordsInBGDictionary[i].length >= self.inputWord.length && [[self.wordsInBGDictionary[i] substringWithRange:NSMakeRange(0, self.inputWord.length)] isEqual:self.inputWord])
+            {
+                //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
+                [wordsToDisplay addObject:self.wordsInBGDictionary[i]];
+            }
         }
     }
     
@@ -179,7 +247,12 @@
 
 -(NSString*)descriptionOfWord:(NSString*)word
 {
-    return [self.wordsDescription objectForKey:word];
+    if ([self.wordsENDescription objectForKey:word])
+    {
+        return [self.wordsENDescription objectForKey:word];
+    }
+    
+    return [self.wordsBGDescription objectForKey:word];
 }
 
 @end
