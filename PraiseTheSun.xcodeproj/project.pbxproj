@@ -22,6 +22,7 @@
 		8EC231DF265CEA56008EACBE /* WordsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231DE265CEA55008EACBE /* WordsTableViewCell.m */; };
 		8EC231E3265CF985008EACBE /* DictionaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231E2265CF985008EACBE /* DictionaryViewController.m */; };
 		8EC231EA265D230F008EACBE /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231E9265D230F008EACBE /* DescriptionViewController.m */; };
+		8EC231F0265E465D008EACBE /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231EF265E465D008EACBE /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,8 @@
 		8EC231E6265D18B7008EACBE /* NotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationNames.h; sourceTree = "<group>"; };
 		8EC231E8265D230F008EACBE /* DescriptionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
 		8EC231E9265D230F008EACBE /* DescriptionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
+		8EC231EE265E465D008EACBE /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		8EC231EF265E465D008EACBE /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,8 @@
 				8EC231E2265CF985008EACBE /* DictionaryViewController.m */,
 				8EC231E8265D230F008EACBE /* DescriptionViewController.h */,
 				8EC231E9265D230F008EACBE /* DescriptionViewController.m */,
+				8EC231EE265E465D008EACBE /* SettingsViewController.h */,
+				8EC231EF265E465D008EACBE /* SettingsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 				8EC231EA265D230F008EACBE /* DescriptionViewController.m in Sources */,
 				8EC231A4264E5B2A008EACBE /* SceneDelegate.m in Sources */,
 				8EC231BE264E7C2E008EACBE /* Dictionary.m in Sources */,
+				8EC231F0265E465D008EACBE /* SettingsViewController.m in Sources */,
 				8EC231DB265CE805008EACBE /* WordsTableViewController.m in Sources */,
 				8EC231E3265CF985008EACBE /* DictionaryViewController.m in Sources */,
 			);

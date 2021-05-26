@@ -180,6 +180,7 @@
     
 }
 
+//TODO: only part of words - user choice
 -(NSArray<NSString*>*)wordsStartedWith:(NSString*)word
 {
     if ([word isEqual:@""])
