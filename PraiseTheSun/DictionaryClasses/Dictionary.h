@@ -6,8 +6,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DictionaryFileContent.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef enum
+{
+    EnumLanguageBG,
+    EnumLanguageEN
+} EnumLanguage;
 
 @interface Dictionary : NSObject
 
@@ -15,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (readonly) char letter;
 
 //language
-@property (strong, nonatomic) NSString* language;
+@property (assign) EnumLanguage language;
 
 
 //init with this one letter - initialize array with index from file

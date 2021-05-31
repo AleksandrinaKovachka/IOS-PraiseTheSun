@@ -31,7 +31,7 @@
 
 - (IBAction)onClickSubmit:(id)sender
 {
-    self.consoleBoardLabel.text = [self.dictionary wordsStartedWith:self.inputChoice.text];
+    self.consoleBoardLabel.text = [self.dictionary wordsStartedWith:self.inputChoice.text][0];
 }
 
 

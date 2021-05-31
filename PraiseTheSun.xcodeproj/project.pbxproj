@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8EACE3D2265F7D66009380FC /* DictionaryFileContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EACE3D1265F7D66009380FC /* DictionaryFileContent.m */; };
 		8EC231A1264E5B2A008EACBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231A0264E5B2A008EACBE /* AppDelegate.m */; };
 		8EC231A4264E5B2A008EACBE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231A3264E5B2A008EACBE /* SceneDelegate.m */; };
 		8EC231A7264E5B2A008EACBE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231A6264E5B2A008EACBE /* ViewController.m */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8EACE3D0265F7D66009380FC /* DictionaryFileContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DictionaryFileContent.h; sourceTree = "<group>"; };
+		8EACE3D1265F7D66009380FC /* DictionaryFileContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DictionaryFileContent.m; sourceTree = "<group>"; };
 		8EC2319C264E5B2A008EACBE /* PraiseTheSun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PraiseTheSun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC2319F264E5B2A008EACBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8EC231A0264E5B2A008EACBE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -111,6 +114,8 @@
 			children = (
 				8EC231BC264E7C2E008EACBE /* Dictionary.h */,
 				8EC231BD264E7C2E008EACBE /* Dictionary.m */,
+				8EACE3D0265F7D66009380FC /* DictionaryFileContent.h */,
+				8EACE3D1265F7D66009380FC /* DictionaryFileContent.m */,
 			);
 			path = DictionaryClasses;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EACE3D2265F7D66009380FC /* DictionaryFileContent.m in Sources */,
 				8EC231A7264E5B2A008EACBE /* ViewController.m in Sources */,
 				8EC231DF265CEA56008EACBE /* WordsTableViewCell.m in Sources */,
 				8EC231A1264E5B2A008EACBE /* AppDelegate.m in Sources */,

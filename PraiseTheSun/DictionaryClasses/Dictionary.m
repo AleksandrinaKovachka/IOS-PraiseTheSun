@@ -10,14 +10,9 @@
 
 @interface Dictionary ()
 
-@property (strong, nonatomic) NSString* inputWord;
-@property (strong, nonatomic) NSMutableDictionary<NSString*, NSString*>* wordsENDescription;
-@property (strong, nonatomic) NSMutableArray<NSString*>* wordsInENDictionary;
+@property (strong, nonatomic) NSDictionary<NSString*, NSString*>* englishWordsDictionary;
 
-@property (strong, nonatomic) NSMutableDictionary<NSString*, NSString*>* wordsBGDescription;
-@property (strong, nonatomic) NSMutableArray<NSString*>* wordsInBGDictionary;
-
-@property (strong, nonatomic) NSMutableString* wordDescription;
+@property (strong, nonatomic) NSDictionary<NSString*, NSString*>* bulgarianWordsDictionary;
 
 
 @end
@@ -28,157 +23,22 @@
 {
     if ([super init])
     {
-        //self.language = language;
-        
-        [self loadWordsAndDescription];
+        //TODO: [self loadWordsAndDescription];
+        DictionaryFileContent* dictionaryContent = [[DictionaryFileContent alloc] init];
+        self.englishWordsDictionary = dictionaryContent.englishWordsDictionary;
+        self.bulgarianWordsDictionary = dictionaryContent.bulgarianWordsDictionary;
     }
     
     return self;
 }
 
--(void)loadWordsAndDescription
+-(NSDictionary<NSString *, NSString *> *)activeDictionary
 {
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* fileWordsENName = [documentsDirectory stringByAppendingPathComponent:@"words_en.txt"];
-    NSString* fileWordsENDescriptionName = [documentsDirectory stringByAppendingPathComponent:@"words_description_en.txt"];
-    
-    NSString* fileWordsBGName = [documentsDirectory stringByAppendingPathComponent:@"words_bg.txt"];
-    NSString* fileWordsBGDescriptionName = [documentsDirectory stringByAppendingPathComponent:@"words_description_bg.txt"];
-    
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    
-    //check if have that file
-    if (![fileManager fileExistsAtPath:fileWordsENName] && ![fileManager fileExistsAtPath:fileWordsENDescriptionName] &&
-        ![fileManager fileExistsAtPath:fileWordsBGName] && ![fileManager fileExistsAtPath:fileWordsBGDescriptionName])
+    if (self.language == EnumLanguageEN)
     {
-        NSLog(@"no file");
-        
-        self.wordsInENDictionary = [[NSMutableArray alloc] init];
-        self.wordsENDescription = [[NSMutableDictionary alloc] init];
-        
-        self.wordsInBGDictionary = [[NSMutableArray alloc] init];
-        self.wordsBGDescription = [[NSMutableDictionary alloc] init];
-        
-        self.wordDescription = [[NSMutableString alloc] init];
-        
-        self.language = @"en";
-        [self createWordsAndDescriptionFiles];
-        
-        self.language = @"bg";
-        [self createWordsAndDescriptionFiles];
-        
-        return;
+        return self.englishWordsDictionary;
     }
-    
-    self.wordsInENDictionary = [[NSMutableArray alloc] initWithContentsOfFile:fileWordsENName];
-    self.wordsENDescription = [[NSMutableDictionary alloc] initWithContentsOfFile:fileWordsENDescriptionName];
-    
-    self.wordsInBGDictionary = [[NSMutableArray alloc] initWithContentsOfFile:fileWordsBGName];
-    self.wordsBGDescription = [[NSMutableDictionary alloc] initWithContentsOfFile:fileWordsBGDescriptionName];
-}
-
--(void)createWordsAndDescriptionFiles
-{
-    NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
-    
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@_%@", self.language, otherLanguage] ofType:@"txt"];
-    
-    FILE* file = fopen([fileRoot UTF8String], "r");
-    char buffer[1024];
-    
-    while (fgets(buffer, 1024, file))
-    {
-        
-        NSString* line = [NSString stringWithUTF8String:buffer];
-        
-        [self searchWordInLine:line];
-        
-    }
-    
-    fclose(file);
-    
-    //save data
-    [self saveWordsAndDescriptionInFile];
-    //[self printData];
-}
-
--(void)searchWordInLine:(NSString*)line
-{
-    if ([line containsString:@"@"])
-    {
-        NSString* lastWord = self.inputWord;
-        self.inputWord = [line componentsSeparatedByString:@"@"].lastObject;
-        
-        if (lastWord != nil)
-        {
-            [self.wordDescription appendString:[line componentsSeparatedByString:@"@"].firstObject];
-            
-            if ([self.language isEqual:@"en"])
-            {
-                [self.wordsENDescription setValue:self.wordDescription forKey:lastWord];
-            }
-            else
-            {
-                [self.wordsBGDescription setValue:self.wordDescription forKey:lastWord];
-            }
-
-            self.wordDescription = [[NSMutableString alloc] init];
-        }
-        
-        if (self.inputWord.length != 0)
-        {
-            self.inputWord = [self.inputWord substringWithRange:NSMakeRange(0, self.inputWord.length - 1)];
-            
-            if ([self.language isEqual:@"en"])
-            {
-                [self.wordsInENDictionary addObject:self.inputWord];
-            }
-            else
-            {
-                [self.wordsInBGDictionary addObject:self.inputWord];
-            }
-        }
-    }
-    else
-    {
-        [self.wordDescription appendString:line];
-    }
-    
-}
-
--(void)saveWordsAndDescriptionInFile
-{
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* fileWordsName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"words_%@.txt", self.language]];
-    NSString* fileWordsDescriptionName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"words_description_%@.txt", self.language]];
-    
-    if ([self.language isEqual:@"en"])
-    {
-        [self.wordsInENDictionary writeToFile:fileWordsName atomically:YES];
-        [self.wordsENDescription writeToFile:fileWordsDescriptionName atomically:YES];
-    }
-    else
-    {
-        [self.wordsInBGDictionary writeToFile:fileWordsName atomically:YES];
-        [self.wordsBGDescription writeToFile:fileWordsDescriptionName atomically:YES];
-    }
-
-}
-
--(void)printData
-{
-    
-    if ([self.wordsENDescription objectForKey:@"AARDVARK"])
-    {
-        NSString* value = [self.wordsENDescription objectForKey:@"A"];
-        NSLog(@"%@", value);
-        NSLog(@"Description: %@", [self.wordsENDescription objectForKey:@"AARDVARK"]);
-        NSLog(@"%@", [self.wordsENDescription valueForKey:@"AARDVARK"]);
-    }
-    
+    return self.bulgarianWordsDictionary;
 }
 
 //TODO: only part of words - user choice
@@ -189,495 +49,64 @@
         return @[];
     }
     
-    word = [word uppercaseString];
-    self.inputWord = word;
+    NSString* curWord = [word uppercaseString];
     
     //language
-    if ([self.wordsENDescription objectForKey:[self.inputWord substringWithRange:NSMakeRange(0, 1)]])
+    //TODO : maybe something more efficient
+    if ([self.englishWordsDictionary objectForKey:[curWord substringWithRange:NSMakeRange(0, 1)]])
     {
-        self.language = @"en";
+        self.language = EnumLanguageEN;
     }
     else
     {
-        self.language = @"bg";
+        self.language = EnumLanguageBG;
     }
     
-    return [self equalWords];
+    [self didHaveWord:curWord];
+    
+    return [self commonPrefixedWordsTo:curWord];
 }
 
--(NSArray<NSString*>*)equalWords
+-(void)didHaveWord:(NSString*)word
 {
-    if ([self.wordsENDescription objectForKey:self.inputWord] || [self.wordsBGDescription objectForKey:self.inputWord])
+    if ([[self activeDictionary] objectForKey:word])
     {
-        NSString* wordWithDescription;
-        if ([self.language isEqual:@"en"])
-        {
-            wordWithDescription = [self.wordsENDescription objectForKey: self.inputWord];
-        }
-        else
-        {
-            wordWithDescription = [self.wordsBGDescription objectForKey: self.inputWord];
-        }
+        NSString* wordWithDescription = [self.activeDictionary objectForKey:word];
         
         //notification to change word description
         [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_HAVE_WORD object:wordWithDescription userInfo:nil];
-        
-        
-        //return @[self.inputWord];
     }
+}
+
+-(NSArray<NSString*>*)commonPrefixedWordsTo:(NSString*)word
+{
+    NSMutableArray<NSString*>* wordsWithCommonPrefix = [[NSMutableArray alloc] init];
     
-    NSMutableArray<NSString*>* wordsToDisplay = [[NSMutableArray alloc] init];
-    
-    if ([self.language isEqual:@"en"])
+    //all keys
+    for (NSString* key in self.activeDictionary)
     {
-        for (int i = 0; i < self.wordsInENDictionary.count; ++i)
+        if (key.length >= word.length && [key hasPrefix:word])
         {
-            if (self.wordsInENDictionary[i].length >= self.inputWord.length && [[self.wordsInENDictionary[i] substringWithRange:NSMakeRange(0, self.inputWord.length)] isEqual:self.inputWord])
-            {
                 //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
-                [wordsToDisplay addObject:self.wordsInENDictionary[i]];
+            [wordsWithCommonPrefix addObject:key];
                 //[wordsToDisplay addObject:[NSString stringWithFormat:@"%@\n%@", self.wordsInENDictionary[i], [self.wordsENDescription objectForKey: self.wordsInENDictionary[i]]]];
-            }
-        }
-    }
-    else
-    {
-        for (int i = 0; i < self.wordsInBGDictionary.count; ++i)
-        {
-            if (self.wordsInBGDictionary[i].length >= self.inputWord.length && [[self.wordsInBGDictionary[i] substringWithRange:NSMakeRange(0, self.inputWord.length)] isEqual:self.inputWord])
-            {
-                //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
-                [wordsToDisplay addObject:self.wordsInBGDictionary[i]];
-                //[wordsToDisplay addObject:[NSString stringWithFormat:@"%@\n%@", self.wordsInBGDictionary[i], [self.wordsBGDescription objectForKey: self.wordsInBGDictionary[i]]]];
-            }
         }
     }
     
-    if (wordsToDisplay.count < 10) //TODO: user choice
+    if (wordsWithCommonPrefix.count < 10) //TODO: user choice
     {
-        self.inputWord = [self.inputWord substringWithRange:NSMakeRange(0, self.inputWord.length - 1)];
+        NSString* part = [word substringWithRange:NSMakeRange(0, word.length - 1)];
         
-        return [self equalWords];
+        return [self commonPrefixedWordsTo:part];
     }
     
-    return [NSArray arrayWithArray:wordsToDisplay];//[NSString stringWithString:wordsToDisplay];
+    return wordsWithCommonPrefix;//[NSString stringWithString:wordsToDisplay];
 }
 
 -(NSString*)descriptionOfWord:(NSString*)word
 {
-    if ([self.wordsENDescription objectForKey:word])
-    {
-        return [self.wordsENDescription objectForKey:word];
-    }
-    
-    return [self.wordsBGDescription objectForKey:word];
+    //return [[self activeDictionary] objectForKey:word];
+    return self.activeDictionary[word];
 }
 
 @end
-
-/*@interface Dictionary ()
-
-@property (strong, nonatomic) NSString* word;
-
-@property (strong, nonatomic) NSString* curLetter; //if user clear search bar - the letter have to be change
-
-@property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* letterPositions;
-//@property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* testLetterPositions;
-
-@property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* wordsWithCurLetter;
-
-//@property (strong, nonatomic) NSMutableArray<NSString*>* wordsToDisplay;
-
-
-@end
-
-@implementation Dictionary
-
--(instancetype)initWithLanguage:(NSString*)language
-{
-    if ([super init])
-    {
-        self.language = language;
-        self.wordsWithCurLetter = [[NSMutableDictionary alloc] init];
-        
-        //self.testLetterPositions = [[NSMutableDictionary alloc] init];
-        //[self createPositionFile];
-        //self.wordsToDisplay = [[NSMutableArray alloc] init];
-        
-        [self loadPositions];
-        //[self printPositions];
-        
-        //get index for letter positions from position file
-        //get first words from dictionary - if is buffer - count for words
-    }
-    
-    return self;
-}
-
--(void)loadPositions
-{
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* fileName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"positions_%@.txt", self.language]];
-    
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    
-    //check if have that file
-    if (![fileManager fileExistsAtPath:fileName])
-    {
-        NSLog(@"no file");
-        [self createPositionFile];
-        //[self printPositions];
-        return;
-    }
-    
-    self.letterPositions = [[NSMutableDictionary alloc] initWithContentsOfFile:fileName];
-}
-
-//search words
--(void)dictionaryContent
-{
-    NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
-    
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@_%@", self.language, otherLanguage] ofType:@"txt"];
-    
-    FILE* file = fopen([fileRoot UTF8String], "r");
-    char buffer[1024];
-    
-    //get current letter
-    self.curLetter = [self.word substringWithRange:NSMakeRange(0, 1)];
-    
-    int position = [[self.letterPositions objectForKey:self.curLetter] intValue];
-    
-    fseek(file, position, SEEK_CUR);
-    
-    BOOL haveWordsWithCurLetter = YES;
-    
-    while (haveWordsWithCurLetter) //or no words
-    {
-        fgets(buffer, 1024, file);
-        
-        NSString* line = [NSString stringWithUTF8String:buffer];
-        
-        position += line.length;
-        
-        haveWordsWithCurLetter = [self didHaveWord:line withPosition:position];
-    }
-    
-    fclose(file);
-}
-
--(BOOL)didHaveWord:(NSString*)line withPosition:(int)position //position in file
-{
-    if ([line containsString:@"@"])
-    {
-        NSString* wordInDictionary = [line componentsSeparatedByString:@"@"].lastObject;
-        wordInDictionary = [wordInDictionary substringWithRange:NSMakeRange(0, wordInDictionary.length - 1)];
-        
-        if ([self.curLetter isEqual:[wordInDictionary substringWithRange:NSMakeRange(0, 1)]])
-        {
-            int positionInFile = position - (int)[line rangeOfString:@"@"].location;
-            [self.wordsWithCurLetter setValue:[NSNumber numberWithInt:positionInFile] forKey:wordInDictionary]; //not currect
-            
-            return YES;
-        }
-        
-        return NO;
-    }
-    
-    return YES;
-}
-
--(NSString*)equalWordsStartedWith:(NSString*)word
-{
-    if (word.length != 1 && [self.wordsWithCurLetter objectForKey:word])
-    {
-        return word;
-    }
-    
-    NSMutableString* wordsToDisplay = [[NSMutableString alloc] init];
-    
-    for (NSString* key in self.wordsWithCurLetter)
-    {
-        if (key.length >= word.length && [[key substringWithRange:NSMakeRange(0, word.length)] isEqual:word])
-        {
-            [wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", key]];
-        }
-    }
-    
-    if (wordsToDisplay.length == 0)
-    {
-        return [self equalWordsStartedWith:[word substringWithRange:NSMakeRange(0, word.length - 1)]];
-    }
-    
-    return [NSString stringWithString:wordsToDisplay];
-}
-
--(NSString*)printWordsStartedWith:(NSString*)word
-{
-    word = [word uppercaseString];
-    self.word = word;
-    
-    //[self printPositions];
-    
-    if (self.curLetter == nil || ![self.curLetter isEqual:[self.word substringWithRange:NSMakeRange(0, 1)]])
-    {
-        [self dictionaryContent];
-    }
-
-    return [self equalWordsStartedWith:word];
-}
-
--(void)printPositions
-{
-    NSLog(@"%@", self.letterPositions.allKeys);
-    NSLog(@"%@", self.letterPositions.allValues);
-    
-    self.curLetter = [self.word substringWithRange:NSMakeRange(0, 1)];
-    
-    if ([self.letterPositions objectForKey:self.curLetter])
-    {
-        NSLog(@"have element %@", [self.letterPositions objectForKey:self.curLetter]);
-    }
-}
-
-//get size of dictionary file
--(long)fileSize
-{
-    NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@_%@", self.language, otherLanguage] ofType:@"txt"];
-    
-    FILE* file = fopen([fileRoot UTF8String], "r");
-    
-    fseek(file, 0, SEEK_END);
-    long size = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    fclose(file);
-    
-    return size;
-}
-
-//function for position file ------------------------------------------------------------------------------------
--(void)createPositionFile
-{
-    NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
-    
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@_%@", self.language, otherLanguage] ofType:@"txt"];
-    
-    FILE* file = fopen([fileRoot UTF8String], "r");
-    char buffer[1024];
-    long cnt = 0;
-    long prevCnt = 0;
-    
-    while (fgets(buffer, 1024, file)) //line by line
-    {
-        NSString* line = [NSString stringWithUTF8String:buffer];
-        
-        cnt = prevCnt;
-        prevCnt = ftell(file);
-        
-        [self searchLetter:line andCnt:cnt];
-    }
-    
-    fclose(file);
-    
-    //[self testPosition];
-    
-    //save in file - dictionary letter-key, position-value
-    //[self savePositionInFile];
-}
-
--(void)testPosition
-{
-    NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
-    
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@_%@", self.language, otherLanguage] ofType:@"txt"];
-    
-    FILE* file = fopen([fileRoot UTF8String], "r");
-    char buffer[1024];
-    
-    //for (int i = 65; i < 91; ++i)
-    //{
-        int position = [[self.testLetterPositions objectForKey:@"B"] intValue];
-        
-        fseek(file, position, SEEK_CUR);
-        
-        fgets(buffer, 1024, file); //or no words
-        NSString* line = [NSString stringWithUTF8String:buffer];
-            
-        NSLog(@"%@\n", line);
-    //}
-    
-    fclose(file);
-}
-
--(void)savePositionInFile
-{
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* fileName = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"positions_%@.txt", self.language]];
-    
-    [self.letterPositions writeToFile:fileName atomically:YES];
-}
-
--(void)searchLetter:(NSString*)line andCnt:(long)cnt
-{
-    if ([line containsString:@"@"])
-    {
-        NSString* part = [line componentsSeparatedByString:@"@"].lastObject;
-        
-        if (part.length == 0)
-        {
-            return;
-        }
-        NSString* firstLetter = [part substringToIndex:1];
-        
-        if (self.curLetter == nil || ![self.curLetter isEqual:firstLetter]) //new letter
-        {
-            self.curLetter = firstLetter;
-            //get position in line
-            //int letterLocation = (int)[line rangeOfString:@"@"].location + 1;
-            //int letterFileLocation = cnt - letterLocation - 1;
-            
-            [self.letterPositions setValue:[NSNumber numberWithLong:cnt] forKey:self.curLetter];
-        }
-        
-    }
-}
-
-@end
-*/
-
-/*
- //@property (assign) int lastPrintedPosition;
-
- //words buffer
- //@property (strong, nonatomic) NSMutableDictionary<NSString*, NSNumber*>* wordsPartBuffer;
- //@property (strong, nonatomic) NSMutableArray<NSMutableDictionary<NSString*, NSNumber*>*>* previousWordsPartBufferStack;
- //last position of printed word
--(NSString*)printWordsStartedWith:(NSString*)word
-{
-    //TODO: if self.word.length > word.length return previous version
-    word = [word uppercaseString];
-    self.word = word;
-    
-    if (self.curLetter == nil)
-    {
-        self.curLetter = [self.word substringWithRange:NSMakeRange(0, 1)];
-    }
-    
-    int position;
-    
-    if (self.wordsPartBuffer == nil)
-    {
-        position = (int)[self.letterPositions objectForKey:self.curLetter];
-    }
-    else
-    {
-        position = [self searchWordInBuffer]; //function to return position to start search
-        
-        if (position == -1)
-        {
-            return [self displayWords];
-        }
-        
-        [self.previousWordsPartBufferStack addObject:self.wordsPartBuffer];
-        [self.wordsPartBuffer removeAllObjects];
-    }
-    
-    [self dictionaryContentWithPosition:position];
-    
-    return [self displayWords];
-}
-
--(NSString*)displayWords
-{
-    NSMutableString* displayWords = [[NSMutableString alloc] init];
-    
-    for (int i = 0; i < self.wordsToDisplay.count; ++i)
-    {
-        [displayWords appendString:[NSString stringWithFormat:@"%@\n", self.wordsToDisplay[i]]];
-    }
-    
-    return [NSString stringWithString:displayWords];
-}
-
--(int)searchWordInBuffer
-{
-    if ([self.wordsPartBuffer objectForKey:self.word])
-    {
-        return (int)[self.wordsPartBuffer objectForKey:self.word];
-    }
-    
-    return -1;
-    //return -1 if buffer do not have that part of word
-}
-
--(void)dictionaryContentWithPosition:(int)position
-{
-    NSString* otherLanguage = [self.language isEqual:@"en"] ? @"bg" : @"en";
-    
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@_%@", self.language, otherLanguage] ofType:@"txt"];
-    
-    FILE* file = fopen([fileRoot UTF8String], "r");
-    char buffer[1024];
-    int cnt = position;
-    
-    //if wordsPartPosition is nil self.curLetter - check if wordsPartPosition have this word
-    
-    fseek(file, [self fileSize], position);
-    
-    while (self.wordsToDisplay.count != 100) //flag - finished with this part of word
-    {
-        fgets(buffer, 1024, file);
-        
-        NSString* line = [NSString stringWithUTF8String:buffer];
-        
-        cnt += line.length;
-        
-        [self didFindWordInDictionary:line andCnt:cnt];
-    }
-    
-    fclose(file);
-}
-
--(BOOL)didFindWordInDictionary:(NSString*)line andCnt:(int)cnt
-{
-    if ([line containsString:@"@"])
-    {
-        NSString* wordInDictionary = [line componentsSeparatedByString:@"@"].lastObject;
-        wordInDictionary = [wordInDictionary substringWithRange:NSMakeRange(0, wordInDictionary.length - 1)];
-        
-        //if part of word in dictionary is different from word - stop
-        if (![[wordInDictionary substringWithRange:NSMakeRange(0, self.word.length)] isEqual:self.word])
-        {
-            return NO;
-        }
-        
-        if (self.wordsToDisplay.count < 100)
-        {
-            [self.wordsToDisplay addObject:wordInDictionary];
-        }
-        else
-        {
-            self.lastPrintedPosition = cnt;
-        }
-        
-        //if is new part - save cnt - if is finish return Yes
-        NSString* partOfWordInDictionary = [wordInDictionary substringWithRange:NSMakeRange(0, self.word.length + 1)];
-        
-        
-        if ([self.wordsPartBuffer objectForKey:partOfWordInDictionary] == nil)
-        {
-            //add new position
-            //int letterLocation = (int)[line rangeOfString:@"@"].location + 1;
-            int letterFileLocation = cnt - (int)[line rangeOfString:@"@"].location;//- 1;
-            
-            [self.wordsPartBuffer setValue:[NSNumber numberWithInt:letterFileLocation] forKey:partOfWordInDictionary];
-            
-        }
-    }
-    
-    return YES;
-}*/
