@@ -19,17 +19,24 @@
 
 @implementation Dictionary
 
--(instancetype)init//WithLanguage:(NSString*)language
+-(instancetype)init
 {
     if ([super init])
     {
-        //TODO: [self loadWordsAndDescription];
         DictionaryFileContent* dictionaryContent = [[DictionaryFileContent alloc] init];
         self.englishWordsDictionary = dictionaryContent.englishWordsDictionary;
         self.bulgarianWordsDictionary = dictionaryContent.bulgarianWordsDictionary;
+        
+        self.numberOfSuggestedWord = 10;
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeNumberOfSuggestedWords:) name:NOTIFICATION_CHANGE_NUMBER_OF_SUGGESTED_WORDS object:nil];
     }
     
     return self;
+}
+
+-(void)didChangeNumberOfSuggestedWords:(NSNotification*)notification
+{
+    self.numberOfSuggestedWord = [notification.object intValue] - 1;
 }
 
 -(NSDictionary<NSString *, NSString *> *)activeDictionary
@@ -51,8 +58,7 @@
     
     NSString* curWord = [word uppercaseString];
     
-    //language
-    //TODO : maybe something more efficient
+    //TODO: maybe something more efficient
     if ([self.englishWordsDictionary objectForKey:[curWord substringWithRange:NSMakeRange(0, 1)]])
     {
         self.language = EnumLanguageEN;
@@ -82,30 +88,32 @@
 {
     NSMutableArray<NSString*>* wordsWithCommonPrefix = [[NSMutableArray alloc] init];
     
-    //all keys
-    for (NSString* key in self.activeDictionary)
+    NSArray<NSString*>* sortedKeys = [[self.activeDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    for (NSString* key in sortedKeys)
     {
         if (key.length >= word.length && [key hasPrefix:word])
         {
-                //[wordsToDisplay appendString:[NSString stringWithFormat:@"%@\n", self.wordsInDictionary[i]]];
             [wordsWithCommonPrefix addObject:key];
-                //[wordsToDisplay addObject:[NSString stringWithFormat:@"%@\n%@", self.wordsInENDictionary[i], [self.wordsENDescription objectForKey: self.wordsInENDictionary[i]]]];
+        }
+        if (wordsWithCommonPrefix.count > self.numberOfSuggestedWord)
+        {
+            break;
         }
     }
     
-    if (wordsWithCommonPrefix.count < 10) //TODO: user choice
+    if (wordsWithCommonPrefix.count < self.numberOfSuggestedWord) //TODO: user choice
     {
         NSString* part = [word substringWithRange:NSMakeRange(0, word.length - 1)];
         
         return [self commonPrefixedWordsTo:part];
     }
     
-    return wordsWithCommonPrefix;//[NSString stringWithString:wordsToDisplay];
+    return wordsWithCommonPrefix;
 }
 
 -(NSString*)descriptionOfWord:(NSString*)word
 {
-    //return [[self activeDictionary] objectForKey:word];
     return self.activeDictionary[word];
 }
 

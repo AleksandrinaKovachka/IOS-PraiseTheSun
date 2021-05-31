@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zpR-QY-WV1">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zpR-QY-WV1">
                                 <rect key="frame" x="114" y="79" width="54" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="Fks-Rf-l6o"/>
@@ -41,6 +41,9 @@
                                     <constraint firstAttribute="width" constant="94" id="CqD-HR-oUG"/>
                                     <constraint firstAttribute="height" constant="32" id="wVb-eQ-ddn"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="valueChangeForSuggestedWords:" destination="L1f-ed-Rea" eventType="valueChanged" id="Gga-h5-Jhc"/>
+                                </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translate on every keystroke:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSC-f1-pNc">
                                 <rect key="frame" x="16" y="133" width="222" height="21"/>
@@ -118,6 +121,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gearshape.fill" catalog="system" id="XE5-hX-Z5c"/>
+                    <connections>
+                        <outlet property="stepper" destination="DVY-ik-3he" id="441-0p-LG7"/>
+                        <outlet property="suggestedWordsTextField" destination="zpR-QY-WV1" id="9u7-Ng-cGT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jll-bP-9sw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

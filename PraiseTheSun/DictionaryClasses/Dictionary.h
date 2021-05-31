@@ -18,20 +18,11 @@ typedef enum
 
 @interface Dictionary : NSObject
 
-//one letter
-//@property (readonly) char letter;
-
-//language
 @property (assign) EnumLanguage language;
+@property (assign) int numberOfSuggestedWord;
 
+-(instancetype)init;
 
-//init with this one letter - initialize array with index from file
--(instancetype)init;//WithLanguage:(NSString*)language;
-
-//load data for letter position
-//-(void)loadPositions;
-
-//function to search by part of word - return words starting with this part - if user push on word ?
 -(NSArray<NSString*>*)wordsStartedWith:(NSString*)word;
 
 -(NSString*)descriptionOfWord:(NSString*)word;

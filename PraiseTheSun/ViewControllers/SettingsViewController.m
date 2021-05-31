@@ -6,8 +6,13 @@
 //
 
 #import "SettingsViewController.h"
+#import "NotificationNames.h"
 
 @interface SettingsViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *suggestedWordsTextField;
+
+@property (weak, nonatomic) IBOutlet UIStepper *stepper;
 
 @end
 
@@ -16,6 +21,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+-(IBAction)valueChangeForSuggestedWords:(id)sender
+{
+    NSUInteger val = [self.stepper value];
+    
+    self.suggestedWordsTextField.text = [NSString stringWithFormat:@"%d", (int)val];
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_NUMBER_OF_SUGGESTED_WORDS object:[NSString stringWithFormat:@"%d", (int)val] userInfo:nil];
 }
 
 /*

@@ -12,5 +12,7 @@
 
 #define NOTIFICATION_HAVE_WORD @"HaveWordInDictionaryNotificationName"
 
+#define NOTIFICATION_CHANGE_NUMBER_OF_SUGGESTED_WORDS @"ChangeNumberOfSeggestedWordsNotificationName"
+
 
 #endif /* NotificationNames_h */
