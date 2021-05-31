@@ -68,9 +68,13 @@
         self.language = EnumLanguageBG;
     }
     
+    NSMutableArray<NSString*>* wordsWithCommonPrefix = [[NSMutableArray alloc] init];
+    
     [self didHaveWord:curWord];
     
-    return [self commonPrefixedWordsTo:curWord];
+    [self commonPrefixedWordsTo:curWord andWordsCommenPrefixArr:wordsWithCommonPrefix];
+    
+    return wordsWithCommonPrefix;
 }
 
 -(void)didHaveWord:(NSString*)word
@@ -84,10 +88,8 @@
     }
 }
 
--(NSArray<NSString*>*)commonPrefixedWordsTo:(NSString*)word
+-(void)commonPrefixedWordsTo:(NSString*)word andWordsCommenPrefixArr:(NSMutableArray<NSString*>*)wordsWithCommonPrefix
 {
-    NSMutableArray<NSString*>* wordsWithCommonPrefix = [[NSMutableArray alloc] init];
-    
     NSArray<NSString*>* sortedKeys = [[self.activeDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     for (NSString* key in sortedKeys)
@@ -106,10 +108,8 @@
     {
         NSString* part = [word substringWithRange:NSMakeRange(0, word.length - 1)];
         
-        return [self commonPrefixedWordsTo:part];
+        return [self commonPrefixedWordsTo:part andWordsCommenPrefixArr:wordsWithCommonPrefix];
     }
-    
-    return wordsWithCommonPrefix;
 }
 
 -(NSString*)descriptionOfWord:(NSString*)word

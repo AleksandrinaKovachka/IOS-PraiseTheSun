@@ -11,6 +11,7 @@
 @interface DictionaryViewController ()
 @property (weak, nonatomic) IBOutlet UISearchBar *wordSearchBar;
 @property (weak, nonatomic) IBOutlet UITextView *currentWordDescription;
+@property (assign) BOOL keystrokeTranslateState;
 
 
 @end
@@ -20,8 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.wordSearchBar.delegate = self;
+    self.keystrokeTranslateState = YES;
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didHaveWordInDictionary:) name:NOTIFICATION_HAVE_WORD object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeKeystrokeTranslateState:) name:NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -32,21 +35,34 @@
     
     self.currentWordDescription.text = partOfWord;
     
-    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_WORD object:partOfWord userInfo:nil];
-    
-    //NSLog(@"%@", partOfWord);
+    if (self.keystrokeTranslateState == YES)
+    {
+        [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_WORD object:partOfWord userInfo:nil];
+    }
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSString* partOfWord = searchBar.text;
     
-    //NSLog(@"%@", partOfWord);
+    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_WORD object:partOfWord userInfo:nil];
 }
 
 -(void)didHaveWordInDictionary:(NSNotification*)notification
 {
     self.currentWordDescription.text = notification.object;
+}
+
+-(void)didChangeKeystrokeTranslateState:(NSNotification*)notification
+{
+    if ([notification.object isEqualToString:@"On"])
+    {
+        self.keystrokeTranslateState = YES;
+    }
+    else
+    {
+        self.keystrokeTranslateState = NO;
+    }
 }
 
 /*

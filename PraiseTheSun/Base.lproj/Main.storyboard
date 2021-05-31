@@ -61,6 +61,9 @@
                                     <constraint firstAttribute="width" constant="47" id="4bf-h6-hPk"/>
                                     <constraint firstAttribute="height" constant="31" id="prU-Gn-ADz"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="onSwitchKeystrokeTranslate:" destination="L1f-ed-Rea" eventType="valueChanged" id="BiI-Vf-DKb"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7G-Z2-b83">
                                 <rect key="frame" x="255" y="186" width="49" height="31"/>
@@ -122,6 +125,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gearshape.fill" catalog="system" id="XE5-hX-Z5c"/>
                     <connections>
+                        <outlet property="keystrokeTranslateSwitch" destination="r4E-q3-OUm" id="zSR-pZ-9hi"/>
                         <outlet property="stepper" destination="DVY-ik-3he" id="441-0p-LG7"/>
                         <outlet property="suggestedWordsTextField" destination="zpR-QY-WV1" id="9u7-Ng-cGT"/>
                     </connections>

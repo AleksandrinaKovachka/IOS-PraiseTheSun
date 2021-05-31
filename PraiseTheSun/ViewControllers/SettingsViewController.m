@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UIStepper *stepper;
 
+@property (weak, nonatomic) IBOutlet UISwitch *keystrokeTranslateSwitch;
+
 @end
 
 @implementation SettingsViewController
@@ -30,6 +32,21 @@
     self.suggestedWordsTextField.text = [NSString stringWithFormat:@"%d", (int)val];
     
     [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_NUMBER_OF_SUGGESTED_WORDS object:[NSString stringWithFormat:@"%d", (int)val] userInfo:nil];
+}
+
+-(IBAction)onSwitchKeystrokeTranslate:(id)sender
+{
+    NSString* keystrokeTranslateState;
+    if (self.keystrokeTranslateSwitch.on == YES)
+    {
+        keystrokeTranslateState = @"On";
+    }
+    else
+    {
+        keystrokeTranslateState = @"Off";
+    }
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE object:keystrokeTranslateState userInfo:nil];
 }
 
 /*

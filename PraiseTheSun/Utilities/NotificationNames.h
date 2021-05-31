@@ -14,5 +14,7 @@
 
 #define NOTIFICATION_CHANGE_NUMBER_OF_SUGGESTED_WORDS @"ChangeNumberOfSeggestedWordsNotificationName"
 
+#define NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE @"ChangeKeystrokeTranslateNotificationName"
+
 
 #endif /* NotificationNames_h */
