@@ -16,6 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *keystrokeTranslateSwitch;
 
+@property (weak, nonatomic) IBOutlet UISwitch *latinAsCyrillicSwitch;
+
+@property (weak, nonatomic) IBOutlet UISwitch *cyrillicAsLatinSwitch;
+
 @end
 
 @implementation SettingsViewController
@@ -47,6 +51,36 @@
     }
     
     [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE object:keystrokeTranslateState userInfo:nil];
+}
+
+-(IBAction)onSwitchLatinAsCyrillic:(id)sender
+{
+    NSString* latinAsCyrillic;
+    if (self.latinAsCyrillicSwitch.on == YES)
+    {
+        latinAsCyrillic = @"On";
+    }
+    else
+    {
+        latinAsCyrillic = @"Off";
+    }
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_LATIN_AS_CYRILLIC object:latinAsCyrillic userInfo:nil];
+}
+
+-(IBAction)onSwitchCyrilicAsLatin:(id)sender
+{
+    NSString* cyrillicAsLatin;
+    if (self.cyrillicAsLatinSwitch.on == YES)
+    {
+        cyrillicAsLatin = @"On";
+    }
+    else
+    {
+        cyrillicAsLatin = @"Off";
+    }
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_CYRILLIC_AS_LATIN object:cyrillicAsLatin userInfo:nil];
 }
 
 /*

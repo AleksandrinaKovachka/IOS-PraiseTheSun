@@ -26,12 +26,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of suggested words:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOd-30-2SM">
-                                <rect key="frame" x="16" y="47" width="222" height="21"/>
+                                <rect key="frame" x="16" y="47" width="267" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="5XO-U1-CLW"/>
+                                    <constraint firstAttribute="width" constant="267" id="5XO-U1-CLW"/>
                                     <constraint firstAttribute="height" constant="21" id="IAP-TA-y2Q"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -46,12 +46,12 @@
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translate on every keystroke:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSC-f1-pNc">
-                                <rect key="frame" x="16" y="133" width="222" height="21"/>
+                                <rect key="frame" x="16" y="133" width="254" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ZN4-3w-bdm"/>
-                                    <constraint firstAttribute="width" constant="222" id="vb1-2H-OSY"/>
+                                    <constraint firstAttribute="width" constant="254" id="vb1-2H-OSY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -65,37 +65,50 @@
                                     <action selector="onSwitchKeystrokeTranslate:" destination="L1f-ed-Rea" eventType="valueChanged" id="BiI-Vf-DKb"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7G-Z2-b83">
-                                <rect key="frame" x="255" y="186" width="49" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G7G-Z2-b83">
+                                <rect key="frame" x="255" y="247" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Pij-Sk-ZFy"/>
                                     <constraint firstAttribute="width" constant="47" id="iZV-PF-MiH"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="onSwitchLatinAsCyrillic:" destination="L1f-ed-Rea" eventType="valueChanged" id="xgr-B7-5yl"/>
+                                </connections>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sU-II-oOn">
-                                <rect key="frame" x="255" y="242" width="49" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7sU-II-oOn">
+                                <rect key="frame" x="255" y="302" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Uwx-Kg-4Ud"/>
                                     <constraint firstAttribute="width" constant="47" id="bMU-5M-Gac"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="onSwitchCyrilicAsLatin:" destination="L1f-ed-Rea" eventType="valueChanged" id="HxJ-uK-KqS"/>
+                                </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interpret Latin as Cyrillic:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHo-Ha-gs8">
-                                <rect key="frame" x="16" y="191" width="189" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latin as Cyrillic:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHo-Ha-gs8">
+                                <rect key="frame" x="16" y="252" width="189" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="189" id="HMq-aS-Z9J"/>
                                     <constraint firstAttribute="height" constant="21" id="uw2-4M-oCf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interpret Cyrillic as Latin:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAP-Xn-hOk">
-                                <rect key="frame" x="16" y="247" width="189" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cyrillic as Latin:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAP-Xn-hOk">
+                                <rect key="frame" x="16" y="307" width="189" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="189" id="St1-x0-Or4"/>
                                     <constraint firstAttribute="height" constant="21" id="ZSK-k3-N2Y"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interpret uppercase:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1n-t3-7ds">
+                                <rect key="frame" x="16" y="224" width="160" height="20"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -106,26 +119,28 @@
                             <constraint firstItem="tHo-Ha-gs8" firstAttribute="leading" secondItem="qv0-13-Ogo" secondAttribute="leading" constant="16" id="1Xg-K7-KII"/>
                             <constraint firstItem="tSC-f1-pNc" firstAttribute="top" secondItem="zpR-QY-WV1" secondAttribute="bottom" constant="20" id="9Y0-M7-fRD"/>
                             <constraint firstItem="zpR-QY-WV1" firstAttribute="leading" secondItem="qv0-13-Ogo" secondAttribute="leading" constant="114" id="CxK-Sd-Io0"/>
-                            <constraint firstItem="7sU-II-oOn" firstAttribute="top" secondItem="G7G-Z2-b83" secondAttribute="bottom" constant="25" id="E6J-RQ-YaI"/>
+                            <constraint firstItem="7sU-II-oOn" firstAttribute="top" secondItem="G7G-Z2-b83" secondAttribute="bottom" constant="24" id="E6J-RQ-YaI"/>
                             <constraint firstItem="DVY-ik-3he" firstAttribute="top" secondItem="YOd-30-2SM" secondAttribute="bottom" constant="11" id="Hh2-pQ-8kq"/>
                             <constraint firstItem="G7G-Z2-b83" firstAttribute="leading" secondItem="tHo-Ha-gs8" secondAttribute="trailing" constant="50" id="Wsj-2j-Kqh"/>
                             <constraint firstItem="YOd-30-2SM" firstAttribute="leading" secondItem="qv0-13-Ogo" secondAttribute="leading" constant="16" id="XuW-1f-CcC"/>
-                            <constraint firstItem="tHo-Ha-gs8" firstAttribute="top" secondItem="tSC-f1-pNc" secondAttribute="bottom" constant="37" id="Z65-EQ-Dp5"/>
-                            <constraint firstItem="HAP-Xn-hOk" firstAttribute="top" secondItem="tHo-Ha-gs8" secondAttribute="bottom" constant="35" id="dSn-H8-doi"/>
+                            <constraint firstItem="tHo-Ha-gs8" firstAttribute="top" secondItem="tSC-f1-pNc" secondAttribute="bottom" constant="98" id="Z65-EQ-Dp5"/>
+                            <constraint firstItem="HAP-Xn-hOk" firstAttribute="top" secondItem="tHo-Ha-gs8" secondAttribute="bottom" constant="34" id="dSn-H8-doi"/>
                             <constraint firstItem="tSC-f1-pNc" firstAttribute="leading" secondItem="qv0-13-Ogo" secondAttribute="leading" constant="16" id="dm4-tt-YZa"/>
                             <constraint firstItem="7sU-II-oOn" firstAttribute="leading" secondItem="HAP-Xn-hOk" secondAttribute="trailing" constant="50" id="eWK-JZ-djK"/>
-                            <constraint firstItem="G7G-Z2-b83" firstAttribute="top" secondItem="r4E-q3-OUm" secondAttribute="bottom" constant="27" id="kbX-4d-sMa"/>
+                            <constraint firstItem="G7G-Z2-b83" firstAttribute="top" secondItem="r4E-q3-OUm" secondAttribute="bottom" constant="88" id="kbX-4d-sMa"/>
                             <constraint firstItem="r4E-q3-OUm" firstAttribute="top" secondItem="DVY-ik-3he" secondAttribute="bottom" constant="17" id="qGR-qT-hlV"/>
                             <constraint firstItem="DVY-ik-3he" firstAttribute="leading" secondItem="zpR-QY-WV1" secondAttribute="trailing" constant="8" symbolic="YES" id="qX6-ke-kpv"/>
                             <constraint firstItem="YOd-30-2SM" firstAttribute="top" secondItem="qv0-13-Ogo" secondAttribute="top" constant="47" id="wkO-IW-kg0"/>
-                            <constraint firstItem="r4E-q3-OUm" firstAttribute="leading" secondItem="tSC-f1-pNc" secondAttribute="trailing" constant="17" id="z15-eJ-L5D"/>
+                            <constraint firstItem="r4E-q3-OUm" firstAttribute="leading" secondItem="tSC-f1-pNc" secondAttribute="trailing" constant="-15" id="z15-eJ-L5D"/>
                             <constraint firstItem="HAP-Xn-hOk" firstAttribute="leading" secondItem="qv0-13-Ogo" secondAttribute="leading" constant="16" id="z1c-sg-iix"/>
                             <constraint firstItem="zpR-QY-WV1" firstAttribute="top" secondItem="YOd-30-2SM" secondAttribute="bottom" constant="11" id="zfs-l2-HJg"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gearshape.fill" catalog="system" id="XE5-hX-Z5c"/>
                     <connections>
+                        <outlet property="cyrillicAsLatinSwitch" destination="7sU-II-oOn" id="had-CN-Gbx"/>
                         <outlet property="keystrokeTranslateSwitch" destination="r4E-q3-OUm" id="zSR-pZ-9hi"/>
+                        <outlet property="latinAsCyrillicSwitch" destination="G7G-Z2-b83" id="VhX-b6-YQG"/>
                         <outlet property="stepper" destination="DVY-ik-3he" id="441-0p-LG7"/>
                         <outlet property="suggestedWordsTextField" destination="zpR-QY-WV1" id="9u7-Ng-cGT"/>
                     </connections>

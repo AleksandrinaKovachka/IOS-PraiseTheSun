@@ -16,5 +16,9 @@
 
 #define NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE @"ChangeKeystrokeTranslateNotificationName"
 
+#define NOTIFICATION_CHANGE_LATIN_AS_CYRILLIC @"ChangeLatinAsCyrillicSwitchNotificationName"
+
+#define NOTIFICATION_CHANGE_CYRILLIC_AS_LATIN @"ChangeCyrillicAsLatinSwitchNotificationName"
+
 
 #endif /* NotificationNames_h */
