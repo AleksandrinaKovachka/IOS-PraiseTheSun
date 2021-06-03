@@ -25,6 +25,8 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didHaveWordInDictionary:) name:NOTIFICATION_HAVE_WORD object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeKeystrokeTranslateState:) name:NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE object:nil];
+    
+    //self.wordSearchBar.keyboardType = UIKeyboardTypeNumberPad;
     // Do any additional setup after loading the view.
 }
 

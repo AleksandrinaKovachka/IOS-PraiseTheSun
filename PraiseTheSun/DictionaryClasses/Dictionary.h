@@ -6,19 +6,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DictionaryFileContent.h"
+#import "Dictionaries.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum
-{
-    EnumLanguageBG,
-    EnumLanguageEN
-} EnumLanguage;
+//typedef enum
+//{
+//    EnumLanguageBG,
+//    EnumLanguageEN
+//} EnumLanguage;
 
 @interface Dictionary : NSObject
 
-@property (assign) EnumLanguage language;
+//@property (assign) EnumLanguage language;
 @property (assign) int numberOfSuggestedWord;
 
 -(instancetype)init;

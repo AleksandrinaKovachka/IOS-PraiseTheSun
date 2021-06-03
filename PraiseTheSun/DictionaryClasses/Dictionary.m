@@ -10,8 +10,9 @@
 
 @interface Dictionary ()
 
-@property (strong, nonatomic) NSDictionary<NSString*, NSString*>* englishWordsDictionary;
-@property (strong, nonatomic) NSDictionary<NSString*, NSString*>* bulgarianWordsDictionary;
+@property (assign) EnumLanguage language;
+
+@property (strong, nonatomic) Dictionaries* currentDictionary;
 
 @property (strong, nonatomic) NSDictionary<NSString*, NSString*>* latinAsCyrillicDictionary;
 @property (strong, nonatomic) NSDictionary<NSString*, NSString*>* cyrillicAsLatinDictionary;
@@ -26,9 +27,7 @@
 {
     if ([super init])
     {
-        DictionaryFileContent* dictionaryContent = [[DictionaryFileContent alloc] init];
-        self.englishWordsDictionary = dictionaryContent.englishWordsDictionary;
-        self.bulgarianWordsDictionary = dictionaryContent.bulgarianWordsDictionary;
+        self.currentDictionary = [[Dictionaries alloc] init];
         
         self.latinAsCyrillicDictionary = @{@"A": @"А", @"B": @"Б", @"C": @"Ц", @"D": @"Д", @"E": @"Е", @"F": @"Ф", @"G": @"Г", @"H": @"Х",
                                            @"I": @"И", @"J": @"Й", @"K": @"К", @"L": @"Л", @"M": @"М", @"N": @"Н", @"O": @"О", @"P": @"П",
@@ -86,11 +85,7 @@
 
 -(NSDictionary<NSString *, NSString *> *)activeDictionary
 {
-    if (self.language == EnumLanguageEN)
-    {
-        return self.englishWordsDictionary;
-    }
-    return self.bulgarianWordsDictionary;
+    return [self.currentDictionary dictionaryWith:self.language];
 }
 
 -(NSDictionary<NSString *, NSString *> *)activeAlphabetDictionary
@@ -157,7 +152,7 @@
     }
     
     //TODO: maybe something more efficient
-    if ([self.englishWordsDictionary objectForKey:[word substringWithRange:NSMakeRange(0, 1)]])
+    if ([self.currentDictionary.englishWordsDictionary objectForKey:[word substringWithRange:NSMakeRange(0, 1)]])
     {
         self.language = EnumLanguageEN;
     }
