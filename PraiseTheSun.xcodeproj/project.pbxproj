@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E4992312668BF1E00E5BDBF /* Dictionaries.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4992302668BF1E00E5BDBF /* Dictionaries.m */; };
+		8E499277266E4B0600E5BDBF /* PredictiveTextSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E499272266E497300E5BDBF /* PredictiveTextSearch.framework */; };
+		8E499278266E4B0600E5BDBF /* PredictiveTextSearch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E499272266E497300E5BDBF /* PredictiveTextSearch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EACE3D2265F7D66009380FC /* DictionaryFileContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EACE3D1265F7D66009380FC /* DictionaryFileContent.m */; };
 		8EC231A1264E5B2A008EACBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231A0264E5B2A008EACBE /* AppDelegate.m */; };
 		8EC231A4264E5B2A008EACBE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231A3264E5B2A008EACBE /* SceneDelegate.m */; };
@@ -27,9 +29,24 @@
 		8EC231F0265E465D008EACBE /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC231EF265E465D008EACBE /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8E499279266E4B0600E5BDBF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E499278266E4B0600E5BDBF /* PredictiveTextSearch.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8E49922F2668BF1E00E5BDBF /* Dictionaries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dictionaries.h; sourceTree = "<group>"; };
 		8E4992302668BF1E00E5BDBF /* Dictionaries.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dictionaries.m; sourceTree = "<group>"; };
+		8E499272266E497300E5BDBF /* PredictiveTextSearch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PredictiveTextSearch.framework; sourceTree = "<group>"; };
 		8EACE3D0265F7D66009380FC /* DictionaryFileContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DictionaryFileContent.h; sourceTree = "<group>"; };
 		8EACE3D1265F7D66009380FC /* DictionaryFileContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DictionaryFileContent.m; sourceTree = "<group>"; };
 		8EC2319C264E5B2A008EACBE /* PraiseTheSun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PraiseTheSun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E499277266E4B0600E5BDBF /* PredictiveTextSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +111,7 @@
 		8EC2319E264E5B2A008EACBE /* PraiseTheSun */ = {
 			isa = PBXGroup;
 			children = (
+				8E499272266E497300E5BDBF /* PredictiveTextSearch.framework */,
 				8EC231E5265D186E008EACBE /* Utilities */,
 				8EC231C72652778C008EACBE /* Resources */,
 				8EC231BB264E7ACA008EACBE /* ViewControllers */,
@@ -171,6 +190,7 @@
 				8EC23198264E5B2A008EACBE /* Sources */,
 				8EC23199264E5B2A008EACBE /* Frameworks */,
 				8EC2319A264E5B2A008EACBE /* Resources */,
+				8E499279266E4B0600E5BDBF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -389,6 +409,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GKHHS42JFG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PraiseTheSun",
+				);
 				INFOPLIST_FILE = PraiseTheSun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -408,6 +432,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GKHHS42JFG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PraiseTheSun",
+				);
 				INFOPLIST_FILE = PraiseTheSun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (

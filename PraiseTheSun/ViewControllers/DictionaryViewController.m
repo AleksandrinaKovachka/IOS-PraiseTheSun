@@ -25,6 +25,9 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didHaveWordInDictionary:) name:NOTIFICATION_HAVE_WORD object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeKeystrokeTranslateState:) name:NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE object:nil];
+    /*
+     self.searchBar.defaultSearchBehaviorDelegate = self;
+     */
     
     //self.wordSearchBar.keyboardType = UIKeyboardTypeNumberPad;
     // Do any additional setup after loading the view.
@@ -33,6 +36,14 @@
 //TODO: different notification for user choice
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+//    if (self.isT9)
+//    {
+//
+//    }
+//    else
+//    {
+//        [self.defaultSeachBehaviorDelegate searchBar:searchBar textDidChange:searchtext];
+//    }
     NSString* partOfWord = searchBar.text;
     
     self.currentWordDescription.text = partOfWord;

@@ -7,13 +7,17 @@
 
 #import "WordsTableViewController.h"
 #import "Dictionary.h"
+#import "Dictionaries.h"
 #import "WordsTableViewCell.h"
 #import "NotificationNames.h"
 #import "DescriptionViewController.h"
+#import <PredictiveTextSearch/PredictiveText.h>
 
 @interface WordsTableViewController ()
 
+@property (strong, nonatomic) Dictionaries* dictionaries;
 @property (strong, nonatomic) Dictionary* dictionary;
+@property (strong, nonatomic) PredictiveText* predictiveText;
 @property (strong, nonatomic) NSArray<NSString*>* wordsArray;
 
 
@@ -24,23 +28,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.dictionaries = [[Dictionaries alloc] init];
+    
     self.dictionary = [[Dictionary alloc] init];
     
+    self.predictiveText = [[PredictiveText alloc] initWithDictionary:self.dictionaries.englishWordsDictionary];
+    
     self.wordsArray = [[NSMutableArray alloc] init];
-    //self.wordsArray = [self.dictionary wordsStartedWith:@"A"];
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeWord:) name:NOTIFICATION_CHANGE_WORD object:nil];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)didChangeWord:(NSNotification*)notification
 {
-    self.wordsArray = [self.dictionary wordsStartedWith:notification.object];
+    //self.wordsArray = [self.dictionary wordsStartedWith:notification.object]; //with predictive text
+    
+    self.wordsArray = [self.predictiveText predictWordsStartedWith:notification.object];
     
     [self.tableView reloadData];
 }
@@ -52,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.wordsArray.count; //TODO: change by user
+    return self.wordsArray.count;
 }
 
 
@@ -73,8 +76,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* word = self.wordsArray[indexPath.row]; //componentsSeparatedByString:@"\n"].firstObject; //error
-    NSString* description = [self.dictionary descriptionOfWord:word];
+    NSString* word = self.wordsArray[indexPath.row];
+    //NSString* description = [self.dictionary descriptionOfWord:word]; //with predictive text
+    NSString* description = [self.predictiveText descriptionOfWord:word];
     
     DescriptionViewController* descriptionController = [DescriptionViewController descriptionViewControllerWith:word andDescription:description];
     
