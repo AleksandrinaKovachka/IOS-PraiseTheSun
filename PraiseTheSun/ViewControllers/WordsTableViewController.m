@@ -32,7 +32,7 @@
     
     self.dictionary = [[Dictionary alloc] init];
     
-    self.predictiveText = [[PredictiveText alloc] initWithDictionary:self.dictionaries.englishWordsDictionary];
+    self.predictiveText = [[PredictiveText alloc] initWithDictionary:self.dictionaries.englishWordsDictionary andLanguage:@"en"];
     
     self.wordsArray = [[NSMutableArray alloc] init];
     
