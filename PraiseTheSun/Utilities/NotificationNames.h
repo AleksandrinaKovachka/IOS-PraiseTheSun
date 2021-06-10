@@ -20,5 +20,7 @@
 
 #define NOTIFICATION_CHANGE_CYRILLIC_AS_LATIN @"ChangeCyrillicAsLatinSwitchNotificationName"
 
+#define NOTIFICATION_CHANGE_PREDICTIVE_TEXT @"ChangePredictiveTextSwitchNotificationName"
+
 
 #endif /* NotificationNames_h */

@@ -1,6 +1,0 @@
-framework module PredictiveTextSearch {
-  umbrella header "PredictiveTextSearch.h"
-
-  export *
-  module * { export * }
-}

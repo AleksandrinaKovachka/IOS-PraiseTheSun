@@ -11,13 +11,10 @@
 #import "WordsTableViewCell.h"
 #import "NotificationNames.h"
 #import "DescriptionViewController.h"
-#import <PredictiveTextSearch/PredictiveText.h>
 
 @interface WordsTableViewController ()
 
-@property (strong, nonatomic) Dictionaries* dictionaries;
 @property (strong, nonatomic) Dictionary* dictionary;
-@property (strong, nonatomic) PredictiveText* predictiveText;
 @property (strong, nonatomic) NSArray<NSString*>* wordsArray;
 
 
@@ -28,22 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dictionaries = [[Dictionaries alloc] init];
-    
     self.dictionary = [[Dictionary alloc] init];
-    
-    self.predictiveText = [[PredictiveText alloc] initWithDictionary:self.dictionaries.englishWordsDictionary andLanguage:@"en"];
     
     self.wordsArray = [[NSMutableArray alloc] init];
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeWord:) name:NOTIFICATION_CHANGE_WORD object:nil];
+
 }
 
 -(void)didChangeWord:(NSNotification*)notification
 {
-    //self.wordsArray = [self.dictionary wordsStartedWith:notification.object]; //with predictive text
+    self.wordsArray = [self.dictionary wordsStartedWith:notification.object];
     
-    self.wordsArray = [self.predictiveText predictWordsStartedWith:notification.object];
+    [self.tableView reloadData];
+}
+
+-(void)didSuggestedWordsChangeTo:(NSArray<NSString*>*)words
+{
+    self.wordsArray = words;
     
     [self.tableView reloadData];
 }
@@ -77,8 +76,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* word = self.wordsArray[indexPath.row];
-    //NSString* description = [self.dictionary descriptionOfWord:word]; //with predictive text
-    NSString* description = [self.predictiveText descriptionOfWord:word];
+    NSString* description = [self.dictionary descriptionOfWord:word];
+    
+    //if is predictive text
+    //[self.userWordsChoiceDelegate didChooseWord:word];
     
     DescriptionViewController* descriptionController = [DescriptionViewController descriptionViewControllerWith:word andDescription:description];
     

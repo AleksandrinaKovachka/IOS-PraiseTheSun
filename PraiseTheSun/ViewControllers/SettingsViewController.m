@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *cyrillicAsLatinSwitch;
 
+@property (weak, nonatomic) IBOutlet UISwitch *predictiveTextSwitch;
+
 @end
 
 @implementation SettingsViewController
@@ -81,6 +83,21 @@
     }
     
     [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_CYRILLIC_AS_LATIN object:cyrillicAsLatin userInfo:nil];
+}
+
+-(IBAction)onSwitchPredictiveText:(id)sender
+{
+    NSString* predictiveText;
+    if (self.predictiveTextSwitch.on == YES)
+    {
+        predictiveText = @"On";
+    }
+    else
+    {
+        predictiveText = @"Off";
+    }
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_PREDICTIVE_TEXT object:predictiveText userInfo:nil];
 }
 
 /*

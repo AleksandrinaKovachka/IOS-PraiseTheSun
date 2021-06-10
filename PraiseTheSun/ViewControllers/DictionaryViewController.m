@@ -7,11 +7,21 @@
 
 #import "DictionaryViewController.h"
 #import "NotificationNames.h"
+#import "Dictionary.h"
+#import "Dictionaries.h"
+#import <PredictiveTextSearch/KeypadSearchBar.h>
+#import "WordsTableViewController.h"
 
 @interface DictionaryViewController ()
-@property (weak, nonatomic) IBOutlet UISearchBar *wordSearchBar;
+
+@property (strong, nonatomic) Dictionaries* dictionaries;
+
+@property (weak, nonatomic) IBOutlet KeypadSearchBar *wordSearchBar;
 @property (weak, nonatomic) IBOutlet UITextView *currentWordDescription;
 @property (assign) BOOL keystrokeTranslateState;
+@property (assign) BOOL predictiveTextState;
+
+@property (weak, nonatomic) WordsTableViewController* wordsTableViewController;
 
 
 @end
@@ -20,11 +30,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.wordSearchBar.delegate = self;
+    
+    self.dictionaries = [[Dictionaries alloc] init];
+    
+    self.wordSearchBar.defaultInputDelegate = self;
+    self.wordSearchBar.suggestedWordsDelegate = self.wordsTableViewController;
+    
+    [self.wordSearchBar initializePredictiveTextWithDictionary:self.dictionaries.englishWordsDictionary andLanguage:@"en"];
+    
     self.keystrokeTranslateState = YES;
+    self.predictiveTextState = NO;
+
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didHaveWordInDictionary:) name:NOTIFICATION_HAVE_WORD object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeKeystrokeTranslateState:) name:NOTIFICATION_CHANGE_KEYSTROKE_TRANSLATE object:nil];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangePredictiveTextState:) name:NOTIFICATION_CHANGE_PREDICTIVE_TEXT object:nil];
+    
     /*
      self.searchBar.defaultSearchBehaviorDelegate = self;
      */
@@ -33,17 +55,10 @@
     // Do any additional setup after loading the view.
 }
 
-//TODO: different notification for user choice
+
+
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-//    if (self.isT9)
-//    {
-//
-//    }
-//    else
-//    {
-//        [self.defaultSeachBehaviorDelegate searchBar:searchBar textDidChange:searchtext];
-//    }
     NSString* partOfWord = searchBar.text;
     
     self.currentWordDescription.text = partOfWord;
@@ -78,14 +93,34 @@
     }
 }
 
-/*
+-(void)didChangePredictiveTextState:(NSNotification*)notification
+{
+    if ([notification.object isEqualToString:@"On"])
+    {
+        self.predictiveTextState = YES;
+        [self.wordSearchBar isPredictiveText:YES];
+    }
+    else
+    {
+        self.predictiveTextState = NO;
+        [self.wordSearchBar isPredictiveText:NO];
+    }
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"EmbedWordsTableViewController"])
+    {
+        self.wordsTableViewController = (WordsTableViewController*)segue.destinationViewController;
+        self.wordsTableViewController.userWordsChoiceDelegate = self.wordSearchBar;
+    }
 }
-*/
+
 
 @end

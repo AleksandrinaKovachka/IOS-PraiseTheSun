@@ -6,10 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <PredictiveTextSearch/KeypadSearchBar.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WordsTableViewController : UITableViewController
+@interface WordsTableViewController : UITableViewController<SuggestedWordsDelegate>
+
+@property (weak, nonatomic) id<UserWordsChoiceDelegate> userWordsChoiceDelegate;
 
 @end
 

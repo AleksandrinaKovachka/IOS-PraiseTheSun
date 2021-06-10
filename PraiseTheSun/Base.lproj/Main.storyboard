@@ -118,6 +118,9 @@
                                     <constraint firstAttribute="width" constant="47" id="72r-k6-UtN"/>
                                     <constraint firstAttribute="height" constant="31" id="nSZ-1R-LUL"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="onSwitchPredictiveText:" destination="L1f-ed-Rea" eventType="valueChanged" id="4Nm-Pr-B6D"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Multi-tap keyboard:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDV-qj-YRe">
                                 <rect key="frame" x="16" y="394" width="154" height="20"/>
@@ -183,6 +186,7 @@
                         <outlet property="cyrillicAsLatinSwitch" destination="7sU-II-oOn" id="had-CN-Gbx"/>
                         <outlet property="keystrokeTranslateSwitch" destination="r4E-q3-OUm" id="zSR-pZ-9hi"/>
                         <outlet property="latinAsCyrillicSwitch" destination="G7G-Z2-b83" id="VhX-b6-YQG"/>
+                        <outlet property="predictiveTextSwitch" destination="YhL-EH-O0q" id="vny-fV-E8j"/>
                         <outlet property="stepper" destination="DVY-ik-3he" id="441-0p-LG7"/>
                         <outlet property="suggestedWordsTextField" destination="zpR-QY-WV1" id="9u7-Ng-cGT"/>
                     </connections>
@@ -199,7 +203,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dP-gc-4Mg">
+                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dP-gc-4Mg" customClass="KeypadSearchBar">
                                 <rect key="frame" x="16" y="28" width="289" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="4Vk-cg-ixP"/>
@@ -218,7 +222,7 @@
                                     <constraint firstAttribute="height" constant="222" id="urJ-g1-8HE"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="LqZ-1H-j61" kind="embed" id="Jox-6g-Q9k"/>
+                                    <segue destination="LqZ-1H-j61" kind="embed" identifier="EmbedWordsTableViewController" id="Jox-6g-Q9k"/>
                                 </connections>
                             </containerView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rzp-pz-ZrF">
