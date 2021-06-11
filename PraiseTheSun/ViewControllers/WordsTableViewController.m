@@ -49,6 +49,13 @@
     [self.tableView reloadData];
 }
 
+-(void)didNumbersChangeTo:(NSString*)word
+{
+    self.wordsArray = [self.dictionary wordsStartedWith:word];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

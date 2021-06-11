@@ -22,6 +22,8 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *predictiveTextSwitch;
 
+@property (weak, nonatomic) IBOutlet UISwitch *multiTapSwitch;
+
 @end
 
 @implementation SettingsViewController
@@ -91,13 +93,32 @@
     if (self.predictiveTextSwitch.on == YES)
     {
         predictiveText = @"On";
+        self.multiTapSwitch.enabled = NO;
     }
     else
     {
         predictiveText = @"Off";
+        self.multiTapSwitch.enabled = YES;
     }
     
     [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_PREDICTIVE_TEXT object:predictiveText userInfo:nil];
+}
+
+-(IBAction)onSwitchMultiTap:(id)sender
+{
+    NSString* multiTap;
+    if (self.multiTapSwitch.on == YES)
+    {
+        multiTap = @"On";
+        self.predictiveTextSwitch.enabled = NO;
+    }
+    else
+    {
+        multiTap = @"Off";
+        self.predictiveTextSwitch.enabled = YES;
+    }
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:NOTIFICATION_CHANGE_MULTI_TAP object:multiTap userInfo:nil];
 }
 
 /*

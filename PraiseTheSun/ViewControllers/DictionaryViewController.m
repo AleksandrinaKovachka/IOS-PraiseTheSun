@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet KeypadSearchBar *wordSearchBar;
 @property (weak, nonatomic) IBOutlet UITextView *currentWordDescription;
 @property (assign) BOOL keystrokeTranslateState;
-@property (assign) BOOL predictiveTextState;
 
 @property (weak, nonatomic) WordsTableViewController* wordsTableViewController;
 
@@ -39,7 +38,6 @@
     [self.wordSearchBar initializePredictiveTextWithDictionary:self.dictionaries.englishWordsDictionary andLanguage:@"en"];
     
     self.keystrokeTranslateState = YES;
-    self.predictiveTextState = NO;
 
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didHaveWordInDictionary:) name:NOTIFICATION_HAVE_WORD object:nil];
@@ -47,12 +45,8 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangePredictiveTextState:) name:NOTIFICATION_CHANGE_PREDICTIVE_TEXT object:nil];
     
-    /*
-     self.searchBar.defaultSearchBehaviorDelegate = self;
-     */
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeMultiTapState:) name:NOTIFICATION_CHANGE_MULTI_TAP object:nil];
     
-    //self.wordSearchBar.keyboardType = UIKeyboardTypeNumberPad;
-    // Do any additional setup after loading the view.
 }
 
 
@@ -97,13 +91,23 @@
 {
     if ([notification.object isEqualToString:@"On"])
     {
-        self.predictiveTextState = YES;
         [self.wordSearchBar isPredictiveText:YES];
     }
     else
     {
-        self.predictiveTextState = NO;
         [self.wordSearchBar isPredictiveText:NO];
+    }
+}
+
+-(void)didChangeMultiTapState:(NSNotification*)notification
+{
+    if ([notification.object isEqualToString:@"On"])
+    {
+        [self.wordSearchBar isMultiTap:YES];
+    }
+    else
+    {
+        [self.wordSearchBar isMultiTap:NO];
     }
 }
 

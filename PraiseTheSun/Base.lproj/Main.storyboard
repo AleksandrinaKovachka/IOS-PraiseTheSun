@@ -138,6 +138,9 @@
                                     <constraint firstAttribute="height" constant="31" id="fcN-CR-OJ1"/>
                                     <constraint firstAttribute="width" constant="47" id="vCu-Vu-WX3"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="onSwitchMultiTap:" destination="L1f-ed-Rea" eventType="valueChanged" id="4uJ-bZ-z3J"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7sU-II-oOn">
                                 <rect key="frame" x="255" y="290" width="49" height="31"/>
@@ -186,6 +189,7 @@
                         <outlet property="cyrillicAsLatinSwitch" destination="7sU-II-oOn" id="had-CN-Gbx"/>
                         <outlet property="keystrokeTranslateSwitch" destination="r4E-q3-OUm" id="zSR-pZ-9hi"/>
                         <outlet property="latinAsCyrillicSwitch" destination="G7G-Z2-b83" id="VhX-b6-YQG"/>
+                        <outlet property="multiTapSwitch" destination="1ag-33-Dz6" id="R0T-Fc-zcT"/>
                         <outlet property="predictiveTextSwitch" destination="YhL-EH-O0q" id="vny-fV-E8j"/>
                         <outlet property="stepper" destination="DVY-ik-3he" id="441-0p-LG7"/>
                         <outlet property="suggestedWordsTextField" destination="zpR-QY-WV1" id="9u7-Ng-cGT"/>

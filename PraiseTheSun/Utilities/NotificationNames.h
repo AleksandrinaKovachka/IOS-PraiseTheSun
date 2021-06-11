@@ -22,5 +22,7 @@
 
 #define NOTIFICATION_CHANGE_PREDICTIVE_TEXT @"ChangePredictiveTextSwitchNotificationName"
 
+#define NOTIFICATION_CHANGE_MULTI_TAP @"ChangeMultiTapSwitchNotificationName"
+
 
 #endif /* NotificationNames_h */
