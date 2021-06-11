@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) Dictionary* dictionary;
 @property (strong, nonatomic) NSArray<NSString*>* wordsArray;
-
+@property (assign) BOOL predictiveTextState;
 
 @end
 
@@ -29,8 +29,10 @@
     
     self.wordsArray = [[NSMutableArray alloc] init];
     
+    self.predictiveTextState = NO;
+    
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeWord:) name:NOTIFICATION_CHANGE_WORD object:nil];
-
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangePredictiveTextState:) name:NOTIFICATION_CHANGE_PREDICTIVE_TEXT object:nil];
 }
 
 -(void)didChangeWord:(NSNotification*)notification
@@ -78,12 +80,26 @@
     NSString* word = self.wordsArray[indexPath.row];
     NSString* description = [self.dictionary descriptionOfWord:word];
     
-    //if is predictive text
-    //[self.userWordsChoiceDelegate didChooseWord:word];
+    if (self.predictiveTextState)
+    {
+        [self.userWordsChoiceDelegate didChooseWord:word];
+    }
     
     DescriptionViewController* descriptionController = [DescriptionViewController descriptionViewControllerWith:word andDescription:description];
     
     [self presentViewController:descriptionController animated:YES completion:nil];
+}
+
+-(void)didChangePredictiveTextState:(NSNotification*)notification
+{
+    if ([notification.object isEqualToString:@"On"])
+    {
+        self.predictiveTextState = YES;
+    }
+    else
+    {
+        self.predictiveTextState = NO;
+    }
 }
 
 
